@@ -1,0 +1,77 @@
+name: Daily NBA Props Report
+
+on:
+  schedule:
+    # Run at 3:00 PM ET (8:00 PM UTC) on days during NBA season (Oct-Jun)
+    - cron: '0 20 * * *'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+    # Only run during NBA season months
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'schedule')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Initialize database
+        run: python main.py --init-db
+
+      - name: Run daily pipeline
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python main.py
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-report-${{ github.run_number }}
+          path: reports/
+          retention-days: 90
+
+  # Grade yesterday's bets every morning at 10 AM ET (3 PM UTC)
+  grade-bets:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Grade yesterday's bets
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python main.py --grade
+
+      - name: Upload updated database
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-${{ github.run_number }}
+          path: nba_props.db
+          retention-days: 365

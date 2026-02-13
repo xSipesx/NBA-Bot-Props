@@ -1,0 +1,32 @@
+# NBA Props Agent — Dependencies
+
+# Data ingestion
+nba_api>=1.5.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+python-dotenv>=1.0.0
+
+# Modeling
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.1.0
+
+# Database
+# (sqlite3 is built-in)
+
+# Claude API
+anthropic>=0.40.0
+
+# Output / Delivery
+jinja2>=3.1.0
+
+# Dashboard (Phase 3)
+streamlit>=1.30.0
+plotly>=5.18.0
+
+# Testing
+pytest>=7.4.0
+
+# Scheduling (if running locally instead of GitHub Actions)
+# schedule>=1.2.0

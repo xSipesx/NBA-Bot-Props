@@ -1,0 +1,18 @@
+# Environment
+.env
+__pycache__/
+*.pyc
+
+# Database
+*.db
+
+# Reports (generated)
+reports/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

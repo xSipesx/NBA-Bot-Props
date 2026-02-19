@@ -11,6 +11,7 @@ from nba_api.stats.static import players as nba_players
 
 import config
 import database as db
+from ingest.nba_helper import call_nba_api
 
 
 def grade_yesterday():
@@ -112,8 +113,7 @@ def _get_actual_points(date):
     actual_points = {}
 
     try:
-        scoreboard = ScoreboardV2(game_date=api_date, league_id="00", timeout=config.NBA_API_TIMEOUT)
-        time.sleep(1)
+        scoreboard = call_nba_api(ScoreboardV2, game_date=api_date, league_id="00")
         games_header = scoreboard.game_header.get_data_frame()
 
         if games_header.empty:
@@ -124,8 +124,7 @@ def _get_actual_points(date):
             game_id = row['GAME_ID']
 
             try:
-                box = BoxScoreTraditionalV3(game_id=game_id, timeout=config.NBA_API_TIMEOUT)
-                time.sleep(0.8)
+                box = call_nba_api(BoxScoreTraditionalV3, game_id=game_id)
 
                 # Get player stats from the box score
                 dfs = box.get_data_frames()

@@ -12,6 +12,7 @@ from nba_api.stats.endpoints import ScoreboardV2
 from nba_api.stats.static import teams as nba_teams
 
 import config
+from ingest.nba_helper import call_nba_api
 
 
 # Team abbreviation lookup
@@ -38,12 +39,11 @@ def get_todays_games(date=None):
     print(f"📅 Fetching schedule for {date}...")
 
     try:
-        scoreboard = ScoreboardV2(
+        scoreboard = call_nba_api(
+            ScoreboardV2,
             game_date=api_date,
             league_id="00",
-            timeout=config.NBA_API_TIMEOUT
         )
-        time.sleep(1)  # rate limit courtesy
 
         games_header = scoreboard.game_header.get_data_frame()
         line_score = scoreboard.line_score.get_data_frame()

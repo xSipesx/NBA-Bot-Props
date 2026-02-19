@@ -9,6 +9,7 @@ from nba_api.stats.endpoints import (
     TeamEstimatedMetrics,
 )
 import config
+from ingest.nba_helper import call_nba_api
 
 
 def get_team_context():
@@ -33,11 +34,11 @@ def get_team_context():
 
     # 1. Basic team stats (opponent PPG, pace proxy)
     try:
-        stats = LeagueDashTeamStats(
+        stats = call_nba_api(
+            LeagueDashTeamStats,
             season=config.NBA_SEASON,
             per_mode_detailed="PerGame",
-            measure_type_detailed_defense="Opponent",  # opponent stats = what they allow
-            timeout=config.NBA_API_TIMEOUT,
+            measure_type_detailed_defense="Base",
         )
         time.sleep(1)
 
@@ -50,22 +51,20 @@ def get_team_context():
             teams[abbrev] = {
                 'team': abbrev,
                 'team_name': row.get('TEAM_NAME', ''),
-                'opp_ppg_allowed': round(row.get('PTS', 0), 1),  # opponent scoring = defense
-                'opp_fga': round(row.get('FGA', 0), 1),
-                'opp_fg_pct': round(row.get('FG_PCT', 0), 3),
-                'opp_fg3_pct': round(row.get('FG3_PCT', 0), 3),
-                'opp_fta': round(row.get('FTA', 0), 1),
+                'opp_ppg_allowed': round(row.get('OPP_PTS_OFF_TOV', 0) if 'OPP_PTS_OFF_TOV' in row.index else row.get('PTS', 0), 1),
+                'wins': int(row.get('W', 0)),
+                'losses': int(row.get('L', 0)),
             }
     except Exception as e:
         print(f"  ⚠️  Error fetching opponent stats: {e}")
 
     # 2. Advanced metrics (def rating, pace)
     try:
-        advanced = LeagueDashTeamStats(
+        advanced = call_nba_api(
+            LeagueDashTeamStats,
             season=config.NBA_SEASON,
             per_mode_detailed="PerGame",
             measure_type_detailed_defense="Advanced",
-            timeout=config.NBA_API_TIMEOUT,
         )
         time.sleep(1)
 
@@ -75,10 +74,11 @@ def get_team_context():
             if abbrev not in teams:
                 teams[abbrev] = {'team': abbrev}
 
-            teams[abbrev]['def_rating'] = round(row.get('DEF_RATING', 0), 1)
-            teams[abbrev]['off_rating'] = round(row.get('OFF_RATING', 0), 1)
-            teams[abbrev]['net_rating'] = round(row.get('NET_RATING', 0), 1)
-            teams[abbrev]['pace'] = round(row.get('PACE', 0), 1)
+            teams[abbrev]['def_rating'] = round(float(row.get('DEF_RATING', 0) or 0), 1)
+            teams[abbrev]['off_rating'] = round(float(row.get('OFF_RATING', 0) or 0), 1)
+            teams[abbrev]['net_rating'] = round(float(row.get('NET_RATING', 0) or 0), 1)
+            teams[abbrev]['pace'] = round(float(row.get('PACE', 0) or 0), 1)
+            teams[abbrev]['opp_ppg_allowed'] = round(float(row.get('DEF_RATING', 0) or 0), 1)
 
     except Exception as e:
         print(f"  ⚠️  Error fetching advanced team stats: {e}")

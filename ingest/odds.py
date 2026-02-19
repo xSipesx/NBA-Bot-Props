@@ -46,14 +46,20 @@ def get_player_points_props(event_ids=None):
         return []
 
     # Filter to today's games
+    # NBA games at 7+ PM ET are dated the NEXT day in UTC (e.g. 7:30 PM ET = 12:30 AM UTC+1)
+    # So we need to match both today ET and tomorrow UTC
     today = config.get_today()
-    today_events = [e for e in events if e.get('commence_time', '')[:10] == today
-                    or _is_tonight(e.get('commence_time', ''), today)]
+    from datetime import datetime, timedelta
+    tomorrow = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+
+    today_events = [
+        e for e in events
+        if e.get('commence_time', '')[:10] in (today, tomorrow)
+    ]
 
     if not today_events:
-        # Sometimes games that start late are dated the next day in UTC
-        # Try to be flexible
-        today_events = events[:10]  # fallback: take upcoming events
+        # Fallback: take the next upcoming events
+        today_events = [e for e in events if e.get('commence_time', '') >= today][:10]
 
     print(f"  📋 Found {len(today_events)} events for today")
 

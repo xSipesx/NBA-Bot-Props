@@ -15,6 +15,7 @@ from nba_api.stats.endpoints import (
 from nba_api.stats.static import players as nba_players, teams as nba_teams
 
 import config
+from ingest.nba_helper import call_nba_api
 
 # Build lookup dicts
 ALL_PLAYERS = {p['id']: p for p in nba_players.get_players()}
@@ -34,13 +35,12 @@ def get_roster_for_game(game):
 
     for team_id, team_abbrev in [(home_id, game['home']), (away_id, game['away'])]:
         try:
-            stats = LeagueDashPlayerStats(
+            stats = call_nba_api(
+                LeagueDashPlayerStats,
                 season=config.NBA_SEASON,
                 team_id_nullable=team_id,
                 per_mode_detailed="PerGame",
-                timeout=config.NBA_API_TIMEOUT,
             )
-            time.sleep(0.8)
 
             df = stats.get_data_frames()[0]
             if df.empty:
@@ -80,13 +80,12 @@ def get_player_game_log(player_id, n_games=20):
         List of dicts with per-game stats, most recent first.
     """
     try:
-        log = PlayerGameLog(
+        log = call_nba_api(
+            PlayerGameLog,
             player_id=player_id,
             season=config.NBA_SEASON,
             season_type_all_star="Regular Season",
-            timeout=config.NBA_API_TIMEOUT,
         )
-        time.sleep(0.6)
 
         df = log.get_data_frames()[0]
         if df.empty:

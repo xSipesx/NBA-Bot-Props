@@ -33,12 +33,13 @@ jobs:
 
       - name: Run daily pipeline
         env:
+          PYTHONUNBUFFERED: "1"
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-        run: python main.py
+        run: python -u main.py
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4

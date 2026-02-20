@@ -3,14 +3,19 @@
 NBA Props Agent — Main Pipeline Orchestrator
 All nba_api imports are lazy to avoid hanging on cloud servers.
 """
+import sys
+print("🔧 DEBUG: main.py starting...", flush=True)
 
 import argparse
-import sys
 import time
 from datetime import datetime
+print("🔧 DEBUG: stdlib imports done", flush=True)
 
 import config
+print("🔧 DEBUG: config imported", flush=True)
+
 import database as db
+print("🔧 DEBUG: database imported", flush=True)
 
 
 def run_daily_pipeline(date=None):
@@ -25,7 +30,9 @@ def run_daily_pipeline(date=None):
     db.init_db()
 
     # ── Step 1: Schedule (Odds API — no nba_api needed) ──
+    print("🔧 DEBUG: About to import odds module...", flush=True)
     from ingest.odds import get_schedule_from_odds
+    print("🔧 DEBUG: odds module imported successfully", flush=True)
     games = get_schedule_from_odds()
     if not games:
         print("  🔄 Odds API schedule empty, trying nba_api fallback...")

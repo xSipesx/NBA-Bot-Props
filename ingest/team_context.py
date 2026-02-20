@@ -1,38 +1,20 @@
 """
-Ingest: Team Context
-Pulls team defensive ratings, pace, and opponent positional scoring data.
+Ingest: Team Context — all nba_api imports are lazy.
 """
 
 import time
-from nba_api.stats.endpoints import (
-    LeagueDashTeamStats,
-    TeamEstimatedMetrics,
-)
 import config
-from ingest.nba_helper import call_nba_api
 
 
 def get_team_context():
-    """
-    Fetch team-level stats: defensive rating, pace, opponent PPG allowed.
+    """Fetch team-level stats: defensive rating, pace, opponent PPG allowed."""
+    from nba_api.stats.endpoints import LeagueDashTeamStats
+    from ingest.nba_helper import call_nba_api
 
-    Returns:
-        Dict keyed by team abbreviation:
-        {
-            'OKC': {
-                'def_rating': 105.2,
-                'pace': 99.3,
-                'opp_ppg_allowed': 108.5,
-                'def_rank': 1,
-                ...
-            }
-        }
-    """
     print("🛡️  Fetching team context (defense, pace)...")
-
     teams = {}
 
-    # 1. Basic team stats (opponent PPG, pace proxy)
+    # Base stats
     try:
         stats = call_nba_api(
             LeagueDashTeamStats,
@@ -41,24 +23,20 @@ def get_team_context():
             measure_type_detailed_defense="Base",
         )
         time.sleep(1)
-
         df = stats.get_data_frames()[0]
         for _, row in df.iterrows():
             abbrev = row.get('TEAM_ABBREVIATION', '')
             if not abbrev:
                 continue
-
             teams[abbrev] = {
                 'team': abbrev,
                 'team_name': row.get('TEAM_NAME', ''),
-                'opp_ppg_allowed': round(row.get('OPP_PTS_OFF_TOV', 0) if 'OPP_PTS_OFF_TOV' in row.index else row.get('PTS', 0), 1),
-                'wins': int(row.get('W', 0)),
-                'losses': int(row.get('L', 0)),
+                'opp_ppg_allowed': 114.0,  # default, updated by advanced stats
             }
     except Exception as e:
-        print(f"  ⚠️  Error fetching opponent stats: {e}")
+        print(f"  ⚠️  Error fetching base team stats: {e}")
 
-    # 2. Advanced metrics (def rating, pace)
+    # Advanced stats (def rating, pace)
     try:
         advanced = call_nba_api(
             LeagueDashTeamStats,
@@ -67,77 +45,31 @@ def get_team_context():
             measure_type_detailed_defense="Advanced",
         )
         time.sleep(1)
-
         df_adv = advanced.get_data_frames()[0]
         for _, row in df_adv.iterrows():
             abbrev = row.get('TEAM_ABBREVIATION', '')
             if abbrev not in teams:
                 teams[abbrev] = {'team': abbrev}
-
             teams[abbrev]['def_rating'] = round(float(row.get('DEF_RATING', 0) or 0), 1)
             teams[abbrev]['off_rating'] = round(float(row.get('OFF_RATING', 0) or 0), 1)
             teams[abbrev]['net_rating'] = round(float(row.get('NET_RATING', 0) or 0), 1)
             teams[abbrev]['pace'] = round(float(row.get('PACE', 0) or 0), 1)
             teams[abbrev]['opp_ppg_allowed'] = round(float(row.get('DEF_RATING', 0) or 0), 1)
-
     except Exception as e:
         print(f"  ⚠️  Error fetching advanced team stats: {e}")
 
-    # Rank teams by defensive rating
+    # Rank
     sorted_by_def = sorted(teams.values(), key=lambda x: x.get('def_rating', 999))
     for rank, team in enumerate(sorted_by_def, 1):
         teams[team['team']]['def_rank'] = rank
 
-    sorted_by_pace = sorted(teams.values(), key=lambda x: x.get('pace', 0), reverse=True)
-    for rank, team in enumerate(sorted_by_pace, 1):
-        teams[team['team']]['pace_rank'] = rank
-
     print(f"  ✅ Loaded context for {len(teams)} teams")
-
-    # Print top 5 defenses and top 5 pace teams
-    print("  🏆 Top 5 Defenses:")
-    for t in sorted_by_def[:5]:
-        print(f"     {t.get('def_rank', '?'):2d}. {t['team']:3s} — DEF RTG: {t.get('def_rating', '?')}")
-    print("  🏃 Top 5 Pace:")
-    for t in sorted_by_pace[:5]:
-        print(f"     {t.get('pace_rank', '?'):2d}. {t['team']:3s} — PACE: {t.get('pace', '?')}")
-
     return teams
 
 
-def get_projected_game_pace(home_team_ctx, away_team_ctx):
-    """Estimate the projected pace for a specific game."""
-    home_pace = home_team_ctx.get('pace', 100)
-    away_pace = away_team_ctx.get('pace', 100)
-    league_avg_pace = 100.0  # approximate
-
-    # Formula: average of both teams' pace, regressed slightly to mean
+def get_projected_game_pace(home_ctx, away_ctx):
+    """Estimate projected pace for a specific game."""
+    home_pace = home_ctx.get('pace', 100)
+    away_pace = away_ctx.get('pace', 100)
     raw = (home_pace + away_pace) / 2
-    regressed = (raw * 0.8) + (league_avg_pace * 0.2)
-    return round(regressed, 1)
-
-
-def get_matchup_adjustment(player_ppg, opp_team_ctx, league_avg_ppg_allowed=114.0):
-    """
-    Calculate matchup adjustment based on opponent defense.
-
-    If opponent allows more points than league average, boost projection.
-    If opponent is elite defensively, discount projection.
-
-    Returns:
-        Float adjustment (positive = boost, negative = discount)
-    """
-    opp_ppg_allowed = opp_team_ctx.get('opp_ppg_allowed', league_avg_ppg_allowed)
-    diff = opp_ppg_allowed - league_avg_ppg_allowed
-
-    # Scale the adjustment relative to the player's scoring volume
-    # A 25 PPG scorer is more affected by matchup than a 10 PPG scorer
-    scale_factor = player_ppg / 20.0  # normalized around ~20 PPG
-
-    adjustment = diff * 0.10 * scale_factor  # conservative multiplier
-
-    return round(adjustment, 1)
-
-
-if __name__ == "__main__":
-    teams = get_team_context()
+    return round((raw * 0.8) + (100.0 * 0.2), 1)

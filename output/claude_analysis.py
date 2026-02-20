@@ -105,19 +105,18 @@ def _build_data_payload(predictions, games, injuries, date):
     sections.append(f"\n### Flagged Bets ({len(bets)} plays):")
     for p in bets:
         sections.append(f"""
-**{p['player_name']}** ({p['team']}) — {p.get('side')} {p.get('line', '?')} pts
-- Season: {p['season_ppg']} PPG | L10: {p['l10_ppg']} PPG
-- Model Projection: {p['projection']} pts (σ: {p['std_dev']})
-- Distribution: 10th:{p['p10']} | 25th:{p['p25']} | 50th:{p['p50']} | 75th:{p['p75']} | 90th:{p['p90']}
-- Line: {p.get('line', '?')} | P(Over): {p.get('prob_over', 0):.1%} | Implied: {p.get('implied_prob_over', 0):.1%}
+**{p['player_name']}** — {p.get('side')} {p.get('line', '?')} pts
+- Model Projection: {p['projection']} pts (adjustment: {p.get('adjustment', 0):+.1f})
+- Juice Signal: {p.get('juice_signal', 0):+.2f} | Injury Shift: {p.get('injury_shift', 0):+.1f}
+- P(Over): {p.get('prob_over', 0):.1%} | P(Under): {p.get('prob_under', 0):.1%}
 - Edge: +{p.get('edge', 0):.1%} | Confidence: {p.get('confidence', 'N/A')}
 - Suggested: {p.get('units', 0)} units | Odds: {p.get('over_odds', '-110')}/{p.get('under_odds', '-110')} [{p.get('bookmaker', '')}]
 """)
 
     if no_bets:
         sections.append(f"\n### No Edge ({len(no_bets)} players):")
-        for p in no_bets[:5]:  # just show a few
-            sections.append(f"- {p['player_name']} ({p['team']}): Proj {p['projection']} vs Line {p.get('line', '?')} | Edge: {p.get('edge', 0):.1%}")
+        for p in no_bets[:5]:
+            sections.append(f"- {p['player_name']}: Proj {p['projection']} vs Line {p.get('line', '?')} | Edge: {p.get('edge', 0):.1%}")
 
     return "\n".join(sections)
 

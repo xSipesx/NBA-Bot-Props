@@ -2,15 +2,13 @@ name: Daily NBA Props Report
 
 on:
   schedule:
-    # Run at 3:00 PM ET (8:00 PM UTC) on days during NBA season (Oct-Jun)
     - cron: '0 20 * * *'
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
 
 jobs:
   daily-report:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    # Only run during NBA season months
+    timeout-minutes: 10
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'schedule')
@@ -47,33 +45,3 @@ jobs:
           name: daily-report-${{ github.run_number }}
           path: reports/
           retention-days: 90
-
-  # Grade yesterday's bets every morning at 10 AM ET (3 PM UTC)
-  grade-bets:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Grade yesterday's bets
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: python main.py --grade
-
-      - name: Upload updated database
-        uses: actions/upload-artifact@v4
-        with:
-          name: database-${{ github.run_number }}
-          path: nba_props.db
-          retention-days: 365

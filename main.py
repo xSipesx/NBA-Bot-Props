@@ -19,7 +19,7 @@ import config
 import database as db
 from ingest.schedule import get_todays_games, get_b2b_teams
 from ingest.player_stats import get_all_player_stats
-from ingest.odds import get_player_points_props, check_api_usage
+from ingest.odds import get_player_points_props, get_schedule_from_odds, check_api_usage
 from ingest.injuries import get_injury_report, get_out_players, estimate_usage_redistribution
 from ingest.team_context import get_team_context, get_projected_game_pace
 from model.predict import run_predictions
@@ -54,16 +54,29 @@ def run_daily_pipeline(date=None):
     db.init_db()
 
     # ── Step 1: Schedule ──
-    games = get_todays_games(date)
+    # Primary: Use Odds API (reliable from cloud servers)
+    # Fallback: Use nba_api (may timeout from GitHub Actions)
+    games = get_schedule_from_odds()
+    if not games:
+        print("  🔄 Odds API schedule empty, trying nba_api...")
+        games = get_todays_games(date)
     if not games:
         print("\n🚫 No games today. Exiting.")
         return
 
-    # Detect back-to-backs
-    b2b_teams = get_b2b_teams(games, date)
+    # Detect back-to-backs (this uses nba_api but is non-critical — wrap in try/except)
+    try:
+        b2b_teams = get_b2b_teams(games, date)
+    except Exception as e:
+        print(f"  ⚠️  Could not detect B2B teams: {e}")
+        b2b_teams = set()
 
     # ── Step 2: Team Context ──
-    team_context = get_team_context()
+    try:
+        team_context = get_team_context()
+    except Exception as e:
+        print(f"  ⚠️  Could not load team context: {e}")
+        team_context = {}
     time.sleep(1)
 
     # ── Step 3: Injuries ──
@@ -76,8 +89,13 @@ def run_daily_pipeline(date=None):
     db.store_injuries(injuries, date)
 
     # ── Step 4: Player Stats ──
-    all_players = get_all_player_stats(games)
-    db.store_player_stats(all_players, date)
+    try:
+        all_players = get_all_player_stats(games)
+    except Exception as e:
+        print(f"  ⚠️  Could not load player stats from nba_api: {e}")
+        all_players = []
+    if all_players:
+        db.store_player_stats(all_players, date)
 
     # ── Step 5: Prop Lines ──
     raw_props = get_player_points_props()

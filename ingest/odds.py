@@ -1,38 +1,43 @@
 """
 Ingest: Sportsbook Odds
 Pulls player points prop lines from The Odds API.
-Supports FanDuel, DraftKings, BetMGM and others.
+Also provides schedule data as a reliable alternative to nba_api.
 
 Requires: ODDS_API_KEY environment variable.
 Sign up free: https://the-odds-api.com
 """
 
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import config
 
+# The Odds API uses full team names — map to abbreviations
+ODDS_TEAM_MAP = {
+    'Atlanta Hawks': 'ATL', 'Boston Celtics': 'BOS', 'Brooklyn Nets': 'BKN',
+    'Charlotte Hornets': 'CHA', 'Chicago Bulls': 'CHI', 'Cleveland Cavaliers': 'CLE',
+    'Dallas Mavericks': 'DAL', 'Denver Nuggets': 'DEN', 'Detroit Pistons': 'DET',
+    'Golden State Warriors': 'GSW', 'Houston Rockets': 'HOU', 'Indiana Pacers': 'IND',
+    'LA Clippers': 'LAC', 'Los Angeles Clippers': 'LAC',
+    'Los Angeles Lakers': 'LAL', 'Memphis Grizzlies': 'MEM',
+    'Miami Heat': 'MIA', 'Milwaukee Bucks': 'MIL', 'Minnesota Timberwolves': 'MIN',
+    'New Orleans Pelicans': 'NOP', 'New York Knicks': 'NYK',
+    'Oklahoma City Thunder': 'OKC', 'Orlando Magic': 'ORL',
+    'Philadelphia 76ers': 'PHI', 'Phoenix Suns': 'PHX',
+    'Portland Trail Blazers': 'POR', 'Sacramento Kings': 'SAC',
+    'San Antonio Spurs': 'SAS', 'Toronto Raptors': 'TOR', 'Utah Jazz': 'UTA',
+    'Washington Wizards': 'WAS',
+}
 
-def get_player_points_props(event_ids=None):
+
+def _get_todays_events():
     """
-    Fetch player points prop lines for today's NBA games.
-
-    The Odds API returns props grouped by game (event).
-
-    Args:
-        event_ids: Optional list of event IDs to filter. If None, fetches all today's games.
-
-    Returns:
-        List of dicts: [{'player_name', 'team', 'line', 'over_odds', 'under_odds', 'bookmaker'}, ...]
+    Fetch today's NBA events from The Odds API.
+    Returns the raw event list and the filtered today-only events.
     """
     if not config.ODDS_API_KEY:
-        print("  ❌ ODDS_API_KEY not set. Skipping odds fetch.")
-        print("     Sign up free at https://the-odds-api.com")
-        return []
+        return [], []
 
-    print("💰 Fetching player points props...")
-
-    # Step 1: Get today's events (games)
     events_url = f"{config.ODDS_API_BASE}/sports/{config.ODDS_SPORT}/events"
     try:
         resp = requests.get(events_url, params={
@@ -43,13 +48,11 @@ def get_player_points_props(event_ids=None):
         events = resp.json()
     except Exception as e:
         print(f"  ❌ Error fetching events: {e}")
-        return []
+        return [], []
 
     # Filter to today's games
-    # NBA games at 7+ PM ET are dated the NEXT day in UTC (e.g. 7:30 PM ET = 12:30 AM UTC+1)
-    # So we need to match both today ET and tomorrow UTC
+    # NBA games at 7+ PM ET are the NEXT day in UTC
     today = config.get_today()
-    from datetime import datetime, timedelta
     tomorrow = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
 
     today_events = [
@@ -58,8 +61,86 @@ def get_player_points_props(event_ids=None):
     ]
 
     if not today_events:
-        # Fallback: take the next upcoming events
-        today_events = [e for e in events if e.get('commence_time', '') >= today][:10]
+        today_events = [e for e in events if e.get('commence_time', '') >= today][:12]
+
+    return events, today_events
+
+
+def get_schedule_from_odds():
+    """
+    Get today's NBA schedule using The Odds API (reliable from cloud servers).
+    This is the primary schedule source since nba_api gets blocked from GitHub Actions.
+
+    Returns:
+        List of game dicts compatible with the rest of the pipeline.
+    """
+    if not config.ODDS_API_KEY:
+        print("  ❌ ODDS_API_KEY not set. Cannot fetch schedule.")
+        return []
+
+    print("📅 Fetching schedule from Odds API...")
+
+    _, today_events = _get_todays_events()
+
+    if not today_events:
+        print("  ⚠️  No events found for today")
+        return []
+
+    games = []
+    seen = set()  # deduplicate
+    for event in today_events:
+        home_full = event.get('home_team', '')
+        away_full = event.get('away_team', '')
+        home = ODDS_TEAM_MAP.get(home_full, home_full)
+        away = ODDS_TEAM_MAP.get(away_full, away_full)
+
+        key = f"{away}@{home}"
+        if key in seen:
+            continue
+        seen.add(key)
+
+        # We need team IDs for nba_api roster lookups later
+        from nba_api.stats.static import teams as nba_teams
+        home_id = None
+        away_id = None
+        for t in nba_teams.get_teams():
+            if t['abbreviation'] == home:
+                home_id = t['id']
+            if t['abbreviation'] == away:
+                away_id = t['id']
+
+        games.append({
+            'game_id': event.get('id', f"{away}_{home}"),
+            'home': home,
+            'away': away,
+            'home_id': home_id,
+            'away_id': away_id,
+            'start_time': event.get('commence_time', ''),
+            'status': 'scheduled',
+        })
+
+    print(f"  ✅ Found {len(games)} games")
+    for g in games:
+        print(f"     {g['away']} @ {g['home']}")
+
+    return games
+
+
+def get_player_points_props(event_ids=None):
+    """
+    Fetch player points prop lines for today's NBA games.
+    """
+    if not config.ODDS_API_KEY:
+        print("  ❌ ODDS_API_KEY not set. Skipping odds fetch.")
+        return []
+
+    print("💰 Fetching player points props...")
+
+    _, today_events = _get_todays_events()
+
+    if not today_events:
+        print("  ⚠️  No events found for today")
+        return []
 
     print(f"  📋 Found {len(today_events)} events for today")
 

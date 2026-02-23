@@ -185,6 +185,13 @@ def init_db():
                 created_at TEXT DEFAULT (datetime('now'))
             );
         """)
+        
+        # Migration: add stat column if it doesn't exist
+        try:
+            conn.execute("ALTER TABLE bets ADD COLUMN stat TEXT DEFAULT 'PTS'")
+        except Exception:
+            pass  # column already exists
+            
     print("✅ Database initialized successfully.")
 
 
@@ -255,11 +262,11 @@ def store_bet(bet, date):
     """Store a locked bet."""
     with get_db() as conn:
         conn.execute("""
-            INSERT INTO bets (date, player_name, team, game_id, side, line, odds, edge, confidence, units)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO bets (date, player_name, team, game_id, side, line, odds, edge, confidence, units, stat)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (date, bet['player_name'], bet.get('team'), bet.get('game_id'),
               bet['side'], bet['line'], bet['odds'], bet.get('edge'),
-              bet.get('confidence'), bet['units']))
+              bet.get('confidence'), bet['units'], bet.get('stat', 'PTS')))
 
 
 def get_ungraded_bets(date):

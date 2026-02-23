@@ -2,16 +2,26 @@ name: Daily NBA Props Report
 
 on:
   schedule:
-    - cron: '0 20 * * *'
+    - cron: '0 20 * * *'   # 3 PM ET — daily predictions
+    - cron: '0 15 * * *'   # 10 AM ET — grade yesterday's bets
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: false
+        default: 'predict'
+        type: choice
+        options:
+          - predict
+          - grade
 
 jobs:
   daily-report:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'schedule')
+      (github.event_name == 'schedule' && github.event.schedule == '0 20 * * *') ||
+      (github.event_name == 'workflow_dispatch' && (github.event.inputs.mode == 'predict' || github.event.inputs.mode == ''))
 
     steps:
       - name: Checkout
@@ -45,3 +55,32 @@ jobs:
           name: daily-report-${{ github.run_number }}
           path: reports/
           retention-days: 90
+
+  grade-bets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: >
+      (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'grade')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Initialize database
+        run: python main.py --init-db
+
+      - name: Grade yesterday's bets
+        env:
+          PYTHONUNBUFFERED: "1"
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python -u main.py --grade

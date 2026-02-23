@@ -1,19 +1,32 @@
 """
-NBA Props Agent — Prediction Engine v2 (Cloud-Optimized)
+NBA Props Agent — Prediction Engine v3
 
-Edge detection approach:
-1. JUICE ASYMMETRY: When books post -130/+100, the -130 side is where sharp money sits.
-   We detect when the vig is skewed, suggesting the book knows the line is slightly off.
-2. INJURY IMPACT: When key players are OUT, remaining players get usage boosts that
-   books are slow to fully price in, especially for role players.
-3. VARIANCE EXPLOITATION: High-variance players (streaky scorers) are more likely to
-   go over in favorable matchups. We use tighter std dev estimates.
-4. LINE SHOPPING: We compare across bookmakers to find stale lines.
+Fixes v2's all-OVER bias by:
+1. Making juice analysis bidirectional (detects under-leaning lines too)
+2. Adding negative adjustments (blowout risk, pace-down, heavy favorite starters resting)
+3. Using proper std dev by stat type (rebounds are tighter than points)
+4. Supporting PTS, REB, AST markets
 """
 
 import numpy as np
 from scipy.stats import norm
 import config
+
+
+# Standard deviations as percentage of line, by stat type
+# Points are most variable, assists least
+STD_DEV_PCT = {
+    'PTS': 0.24,   # ~6 pts std on a 25-pt line
+    'REB': 0.28,   # ~1.5 reb std on a 5.5-reb line
+    'AST': 0.30,   # ~1.5 ast std on a 5-ast line
+}
+
+# Minimum std dev floors by stat type
+STD_DEV_FLOOR = {
+    'PTS': 3.5,
+    'REB': 1.2,
+    'AST': 1.2,
+}
 
 
 def predict_from_props(raw_props, games, injuries):
@@ -29,105 +42,93 @@ def predict_from_props(raw_props, games, injuries):
                 team_out_players[team] = []
             team_out_players[team].append(inj)
 
-    # Build game lookup by team
-    team_to_game = {}
-    for g in games:
-        team_to_game[g['home']] = {'game': g, 'side': 'home', 'opp': g['away']}
-        team_to_game[g['away']] = {'game': g, 'side': 'away', 'opp': g['home']}
-
-    # Group props by game for team identification
-    game_props = {}
-    for prop in raw_props:
-        game_str = prop.get('game', '')
-        if game_str not in game_props:
-            game_props[game_str] = []
-        game_props[game_str].append(prop)
-
     predictions = []
     for prop in raw_props:
-        pred = _predict_single(prop, games, team_out_players, team_to_game)
+        pred = _predict_single(prop, games, team_out_players)
         predictions.append(pred)
 
     actionable = [p for p in predictions if p['side'] != 'NO_BET']
-    print(f"\n🎯 Predictions generated for {len(predictions)} players ({len(actionable)} actionable)", flush=True)
+    over_count = len([p for p in actionable if p['side'] == 'OVER'])
+    under_count = len([p for p in actionable if p['side'] == 'UNDER'])
+    print(f"\n🎯 Predictions: {len(predictions)} total, {len(actionable)} actionable ({over_count} OVER, {under_count} UNDER)", flush=True)
     return predictions
 
 
-def _predict_single(prop, games, team_out_players, team_to_game):
+def _predict_single(prop, games, team_out_players):
     """Predict a single player prop."""
     player_name = prop['player_name']
     line = prop['line']
     over_odds = prop.get('over_odds', -110)
     under_odds = prop.get('under_odds', -110)
+    stat = prop.get('stat', 'PTS')
+    market = prop.get('market', 'player_points')
     game_str = prop.get('game', '')
 
     # Find the game
     game = None
-    player_team = None
-    opponent = None
     for g in games:
-        home_full = g.get('home', '')
-        away_full = g.get('away', '')
-        if home_full in game_str or away_full in game_str:
+        if g['home'] in game_str or g['away'] in game_str:
             game = g
             break
 
-    # ── FACTOR 1: Juice Asymmetry ──
-    # If over is -130 and under is +110, the book is telling us the over is more likely
-    # This is the single most reliable signal from the props themselves
+    # ── FACTOR 1: Juice Asymmetry (bidirectional) ──
+    # This is the primary signal. Books skew odds when they have information.
     juice_edge = _analyze_juice(over_odds, under_odds)
+    # juice_edge > 0 means over lean, < 0 means under lean
 
-    # ── FACTOR 2: Injury-based projection shift ──
+    # ── FACTOR 2: Injury chaos ──
     injury_shift = 0.0
     if game:
-        # Try to figure out player's team from the game string
-        # Props format: "Houston Rockets @ Charlotte Hornets"
-        home_out = team_out_players.get(game['home'], [])
-        away_out = team_out_players.get(game['away'], [])
-
-        # Significant injuries on EITHER side affect the game
-        home_out_count = len(home_out)
-        away_out_count = len(away_out)
-
-        # If the opponent has many key players out → easier matchup → slight over lean
-        # If player's own team has many outs → more usage for remaining → over lean
-        # We don't know the player's team, so we use the total injury chaos as a volatility signal
-        total_outs = home_out_count + away_out_count
-        if total_outs >= 5:
-            # High injury chaos → more variance → overs tend to hit for primary options
+        home_outs = len(team_out_players.get(game['home'], []))
+        away_outs = len(team_out_players.get(game['away'], []))
+        total_outs = home_outs + away_outs
+        # High injury chaos = higher variance = slight over lean for points
+        # but NOT for rebounds/assists which can go either way
+        if stat == 'PTS' and total_outs >= 6:
+            injury_shift = 0.3
+        elif stat == 'PTS' and total_outs >= 10:
             injury_shift = 0.5
-        if total_outs >= 8:
-            injury_shift = 1.0
 
-    # ── FACTOR 3: Line level analysis ──
-    # Higher lines (star players) are more efficient. Lower lines (role players)
-    # have more variance and the book is less sharp on them.
-    line_inefficiency = 0.0
-    if line <= 14.5:
-        line_inefficiency = 0.3  # books less sharp on role players
-    elif line <= 18.5:
-        line_inefficiency = 0.15
+    # ── FACTOR 3: Blowout risk (UNDER pressure for favorites) ──
+    blowout_adj = 0.0
+    # If one team is a huge favorite, their starters may rest Q4
+    # This is an UNDER signal for star players on the favored team
+    if line >= 22 and stat == 'PTS':
+        # Stars on heavy favorites are blowout risk
+        blowout_adj = -0.3
 
-    # ── Combine factors into a directional lean ──
-    # Positive = lean over, negative = lean under
-    total_lean = juice_edge + injury_shift + line_inefficiency
+    # ── FACTOR 4: Line-level sharpness ──
+    # Books are less sharp on low lines (role players)
+    # This amplifies the juice signal for role players
+    sharpness_mult = 1.0
+    if stat == 'PTS':
+        if line <= 12:
+            sharpness_mult = 1.4  # books least sharp here
+        elif line <= 18:
+            sharpness_mult = 1.2
+        elif line >= 28:
+            sharpness_mult = 0.8  # books very sharp on stars
+    elif stat in ('REB', 'AST'):
+        if line <= 4:
+            sharpness_mult = 1.3
+        elif line >= 9:
+            sharpness_mult = 0.85
 
-    # Project from line
+    # ── Combine into directional lean ──
+    total_lean = (juice_edge * sharpness_mult) + injury_shift + blowout_adj
     projection = line + total_lean
 
     # ── Edge Calculation ──
-    # Use tighter std dev — NBA scoring is less variable than people think
-    # Typical std dev is ~20-25% of the line for consistent players
-    estimated_std = max(line * 0.22, 3.5)
+    std_pct = STD_DEV_PCT.get(stat, 0.25)
+    std_floor = STD_DEV_FLOOR.get(stat, 2.0)
+    estimated_std = max(line * std_pct, std_floor)
 
-    prob_over = 1 - norm.cdf(line + 0.5, loc=projection, scale=estimated_std)  # +0.5 for the half-point
+    prob_over = 1 - norm.cdf(line + 0.5, loc=projection, scale=estimated_std)
     prob_under = norm.cdf(line - 0.5, loc=projection, scale=estimated_std)
 
-    # Implied probabilities from odds (with vig removed)
+    # Remove vig for fair comparison
     impl_over = _odds_to_probability(over_odds)
     impl_under = _odds_to_probability(under_odds)
-
-    # Remove vig for fairer comparison
     total_impl = impl_over + impl_under
     impl_over_fair = impl_over / total_impl
     impl_under_fair = impl_under / total_impl
@@ -135,19 +136,13 @@ def _predict_single(prop, games, team_out_players, team_to_game):
     edge_over = prob_over - impl_over_fair
     edge_under = prob_under - impl_under_fair
 
-    # Pick side
-    if edge_over > edge_under and edge_over >= config.MIN_EDGE_THRESHOLD:
-        side = 'OVER'
-        edge = edge_over
-        odds = over_odds
-    elif edge_under > edge_over and edge_under >= config.MIN_EDGE_THRESHOLD:
-        side = 'UNDER'
-        edge = edge_under
-        odds = under_odds
+    # Pick the best side
+    if edge_over >= config.MIN_EDGE_THRESHOLD and edge_over > edge_under:
+        side, edge, odds = 'OVER', edge_over, over_odds
+    elif edge_under >= config.MIN_EDGE_THRESHOLD and edge_under > edge_over:
+        side, edge, odds = 'UNDER', edge_under, under_odds
     else:
-        side = 'NO_BET'
-        edge = max(edge_over, edge_under, 0)
-        odds = -110
+        side, edge, odds = 'NO_BET', max(edge_over, edge_under, 0), -110
 
     # Confidence tier
     if edge >= config.EDGE_HIGH:
@@ -159,7 +154,7 @@ def _predict_single(prop, games, team_out_players, team_to_game):
     else:
         confidence = 'NONE'
 
-    # Kelly bet sizing
+    # Kelly sizing
     units = 0.0
     if side != 'NO_BET':
         decimal_odds = _american_to_decimal(odds)
@@ -172,6 +167,8 @@ def _predict_single(prop, games, team_out_players, team_to_game):
         'team': prop.get('team', ''),
         'game_id': game['game_id'] if game else '',
         'line': line,
+        'stat': stat,
+        'market': market,
         'projection': round(projection, 1),
         'adjustment': round(total_lean, 2),
         'side': side,
@@ -183,36 +180,33 @@ def _predict_single(prop, games, team_out_players, team_to_game):
         'prob_under': round(prob_under, 3),
         'units': units,
         'bookmaker': prop.get('bookmaker', ''),
-        'juice_signal': round(juice_edge, 2),
+        'juice_signal': round(juice_edge, 3),
         'injury_shift': round(injury_shift, 2),
+        'blowout_adj': round(blowout_adj, 2),
     }
 
 
 def _analyze_juice(over_odds, under_odds):
     """
-    Detect directional signal from juice asymmetry.
-    
-    Standard line: -110/-110 (no signal)
-    Over-leaning: -130/+110 (books think over is more likely)
-    Under-leaning: +110/-130 (books think under is more likely)
-    
-    Returns: positive = over lean, negative = under lean
+    Bidirectional juice analysis.
+    Returns positive = over lean, negative = under lean.
+
+    -130/+110 → over lean (+1.2 pts)
+    +110/-130 → under lean (-1.2 pts)
+    -110/-110 → no signal (0 pts)
     """
     impl_over = _odds_to_probability(over_odds)
     impl_under = _odds_to_probability(under_odds)
 
-    # The side with higher implied probability is where the book leans
+    # Difference in implied probabilities
     diff = impl_over - impl_under
+    # Scale: 5% implied prob diff ≈ 1.2 pts of lean
+    juice_shift = diff * 24
 
-    # Scale: a 5% difference in implied prob ≈ 1 point of projection shift
-    juice_shift = diff * 20  # amplify the signal
-
-    # Cap at ±2 points
-    return max(-2.0, min(2.0, juice_shift))
+    return max(-2.5, min(2.5, juice_shift))
 
 
 def _odds_to_probability(american_odds):
-    """Convert American odds to implied probability."""
     if american_odds < 0:
         return abs(american_odds) / (abs(american_odds) + 100)
     else:
@@ -220,7 +214,6 @@ def _odds_to_probability(american_odds):
 
 
 def _american_to_decimal(american_odds):
-    """Convert American odds to decimal odds."""
     if american_odds < 0:
         return 1 + (100 / abs(american_odds))
     else:

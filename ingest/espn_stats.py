@@ -1,14 +1,20 @@
 """
 Ingest: ESPN Player Stats
 Fetches season averages and recent game logs from ESPN's public API.
-Works from cloud servers (unlike nba_api which is blocked).
+
+Correct endpoints:
+- Roster: site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/{id}/roster
+- Gamelog: site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{id}/gamelog
+- Stats: site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{id}/stats
 """
 
 import requests
+import json
 import time
 
 ESPN_ROSTER_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/{team_id}/roster"
-ESPN_GAMELOG_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/players/{player_id}/gamelog"
+ESPN_GAMELOG_URL = "https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{player_id}/gamelog"
+ESPN_STATS_URL = "https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{player_id}/stats"
 
 # ESPN team IDs
 ESPN_TEAM_IDS = {
@@ -22,10 +28,7 @@ ESPN_TEAM_IDS = {
 
 
 def get_starters_stats(games):
-    """
-    For each game, fetch rosters and stats for rotation players (20+ MPG).
-    Returns list of player dicts with season averages and recent form.
-    """
+    """Fetch stats for rotation players (20+ MPG) on teams playing today."""
     all_players = []
     teams_loaded = set()
 
@@ -46,16 +49,16 @@ def get_starters_stats(games):
 
             loaded = 0
             for player in roster:
-                stats = _get_player_gamelog(player['espn_id'])
+                stats = _get_player_season_stats(player['espn_id'], player['name'])
                 if stats and stats.get('min_pg', 0) >= 20:
                     player.update(stats)
                     player['team'] = team_abbrev
                     player['game_id'] = game['game_id']
                     all_players.append(player)
                     loaded += 1
-                time.sleep(0.2)  # be polite to ESPN
+                time.sleep(0.15)
 
-            print(f"  ✅ {team_abbrev}: {loaded} rotation players loaded", flush=True)
+            print(f"  ✅ {team_abbrev}: {loaded} rotation players", flush=True)
 
     starter_count = len([p for p in all_players if p.get('min_pg', 0) >= 28])
     print(f"\n📊 Total: {len(all_players)} rotation players ({starter_count} starters)", flush=True)
@@ -63,7 +66,7 @@ def get_starters_stats(games):
 
 
 def _get_team_roster(espn_team_id, team_abbrev):
-    """Get roster for a team from ESPN."""
+    """Get roster from ESPN."""
     try:
         resp = requests.get(
             ESPN_ROSTER_URL.format(team_id=espn_team_id),
@@ -72,7 +75,7 @@ def _get_team_roster(espn_team_id, team_abbrev):
         resp.raise_for_status()
         data = resp.json()
     except Exception as e:
-        print(f"  ⚠️  Error fetching {team_abbrev} roster: {e}", flush=True)
+        print(f"  ⚠️  Roster error {team_abbrev}: {e}", flush=True)
         return []
 
     players = []
@@ -85,75 +88,169 @@ def _get_team_roster(espn_team_id, team_abbrev):
     return players
 
 
-def _get_player_gamelog(espn_player_id):
-    """Get season stats from a player's game log."""
+def _get_player_season_stats(espn_player_id, player_name):
+    """
+    Get player stats using the v3 stats endpoint.
+    Falls back to gamelog endpoint if stats endpoint fails.
+    """
+    # Try the stats endpoint first (gives season averages directly)
+    stats = _try_stats_endpoint(espn_player_id, player_name)
+    if stats:
+        return stats
+
+    # Fallback to gamelog endpoint
+    stats = _try_gamelog_endpoint(espn_player_id, player_name)
+    if stats:
+        return stats
+
+    return None
+
+
+def _try_stats_endpoint(espn_player_id, player_name):
+    """Try the v3 stats endpoint for season averages."""
     try:
         resp = requests.get(
-            ESPN_GAMELOG_URL.format(player_id=espn_player_id),
+            ESPN_STATS_URL.format(player_id=espn_player_id),
+            params={'region': 'us', 'lang': 'en', 'contentorigin': 'espn'},
             timeout=10
         )
-        resp.raise_for_status()
+        if resp.status_code != 200:
+            return None
         data = resp.json()
     except Exception:
         return None
 
     try:
-        # Navigate ESPN gamelog structure
-        season_types = data.get('seasonTypes', [])
-        if not season_types:
-            return None
+        # Navigate the stats response
+        # Structure: {categories: [{name, statistics: [{...}]}]} or similar
+        categories = data.get('categories', data.get('statistics', []))
+        if not categories:
+            # Try alternate structures
+            results = data.get('results', [])
+            if results:
+                categories = results[0].get('categories', [])
 
-        # Find regular season
-        reg_season = None
-        for st in season_types:
-            if st.get('displayName', '') == 'Regular Season' or st.get('type') == 2:
-                reg_season = st
-                break
-        if not reg_season:
-            reg_season = season_types[0]
-
-        categories = reg_season.get('categories', [])
         if not categories:
             return None
 
-        # Find the stats category with game-by-game data
-        entries = []
-        stat_labels = []
+        stats = {}
         for cat in categories:
-            events = cat.get('events', [])
-            if events:
-                entries = events
-                # Get stat column names
-                stat_labels = []
-                for s in cat.get('labels', []):
-                    if isinstance(s, str):
-                        stat_labels.append(s.upper())
-                    elif isinstance(s, dict):
-                        stat_labels.append(s.get('abbreviation', s.get('name', '')).upper())
-                break
+            cat_name = cat.get('name', cat.get('displayName', '')).lower()
+            for stat in cat.get('statistics', cat.get('stats', [])):
+                stat_name = stat.get('abbreviation', stat.get('name', '')).upper()
+                stat_val = stat.get('displayValue', stat.get('value', ''))
+                try:
+                    stats[stat_name] = float(stat_val)
+                except (ValueError, TypeError):
+                    pass
 
-        if not entries:
+        if 'PTS' in stats and 'MIN' in stats:
+            return {
+                'gp': int(stats.get('GP', 0)),
+                'min_pg': stats.get('MIN', 0),
+                'pts_avg': stats.get('PTS', 0),
+                'reb_avg': stats.get('REB', 0),
+                'ast_avg': stats.get('AST', 0),
+                # Without gamelog, use season as all windows
+                'pts_l5': stats.get('PTS', 0),
+                'reb_l5': stats.get('REB', 0),
+                'ast_l5': stats.get('AST', 0),
+                'pts_l10': stats.get('PTS', 0),
+                'reb_l10': stats.get('REB', 0),
+                'ast_l10': stats.get('AST', 0),
+                'pts_std': stats.get('PTS', 20) * 0.25,
+                'reb_std': stats.get('REB', 5) * 0.30,
+                'ast_std': stats.get('AST', 4) * 0.35,
+                'min_l5': stats.get('MIN', 0),
+                'pts_log': [], 'reb_log': [], 'ast_log': [],
+            }
+    except Exception:
+        pass
+    return None
+
+
+def _try_gamelog_endpoint(espn_player_id, player_name):
+    """Try the v3 gamelog endpoint for game-by-game data."""
+    try:
+        resp = requests.get(
+            ESPN_GAMELOG_URL.format(player_id=espn_player_id),
+            params={'region': 'us', 'lang': 'en', 'contentorigin': 'espn'},
+            timeout=10
+        )
+        if resp.status_code != 200:
+            return None
+        data = resp.json()
+    except Exception:
+        return None
+
+    try:
+        # The gamelog response has multiple possible structures.
+        # We need to find: labels (column names) and events (rows of stats)
+        
+        # Structure 1: {seasonTypes: [{categories: [{events: [...]}]}]}
+        season_types = data.get('seasonTypes', [])
+        
+        # Structure 2: {categories: [{events: [...]}]}
+        if not season_types:
+            categories = data.get('categories', [])
+            if categories:
+                season_types = [{'categories': categories}]
+        
+        if not season_types:
             return None
 
-        # Parse each game
+        # Find regular season data
+        reg = None
+        for st in season_types:
+            name = st.get('displayName', st.get('name', ''))
+            st_type = st.get('type', 0)
+            if 'regular' in name.lower() or st_type == 2:
+                reg = st
+                break
+        if not reg:
+            reg = season_types[0]
+
+        categories = reg.get('categories', [])
+        if not categories:
+            return None
+
+        # Find category with game data
+        stat_labels = []
+        game_entries = []
+        
+        for cat in categories:
+            events = cat.get('events', [])
+            if not events:
+                continue
+            
+            # Get labels
+            labels = cat.get('labels', [])
+            if labels:
+                stat_labels = [l.upper() if isinstance(l, str) else l.get('abbreviation', l.get('name', '')).upper() for l in labels]
+            
+            game_entries = events
+            break
+
+        if not game_entries or not stat_labels:
+            return None
+
+        # Parse games
         game_logs = []
-        for entry in entries:
-            raw_stats = entry.get('stats', [])
-            if not raw_stats or raw_stats == ['--']:
+        for entry in game_entries:
+            raw = entry.get('stats', [])
+            if not raw or raw == ['--']:
                 continue
 
             game = {}
-            for i, val in enumerate(raw_stats):
+            for i, val in enumerate(raw):
                 if i >= len(stat_labels):
                     break
-                label = stat_labels[i]
                 try:
-                    game[label] = float(val)
+                    game[stat_labels[i]] = float(val)
                 except (ValueError, TypeError):
-                    # Handle split stats like "8-15" for FG
                     pass
 
-            if 'PTS' in game and 'MIN' in game:
+            if 'PTS' in game:
                 game_logs.append(game)
 
         if not game_logs:
@@ -171,10 +268,10 @@ def _get_player_gamelog(espn_player_id):
         def std(key):
             vals = [g.get(key, 0) for g in game_logs if key in g]
             if len(vals) < 3:
-                return 5.0
+                return round(avg(key) * 0.25, 1)
             mean = sum(vals) / len(vals)
             var = sum((x - mean) ** 2 for x in vals) / (len(vals) - 1)
-            return round(var ** 0.5, 1)
+            return round(max(var ** 0.5, 1.0), 1)
 
         return {
             'gp': n,
@@ -188,6 +285,35 @@ def _get_player_gamelog(espn_player_id):
             'reb_log': [g.get('REB', 0) for g in game_logs[:10]],
             'ast_log': [g.get('AST', 0) for g in game_logs[:10]],
         }
-
     except Exception:
         return None
+
+
+def debug_one_player(espn_player_id):
+    """Debug helper: dump raw API responses for a single player."""
+    print(f"\n=== DEBUG: Player {espn_player_id} ===")
+    
+    for name, url_template in [("STATS", ESPN_STATS_URL), ("GAMELOG", ESPN_GAMELOG_URL)]:
+        try:
+            url = url_template.format(player_id=espn_player_id)
+            resp = requests.get(url, params={'region': 'us', 'lang': 'en', 'contentorigin': 'espn'}, timeout=10)
+            print(f"\n--- {name} (status {resp.status_code}) ---")
+            if resp.status_code == 200:
+                data = resp.json()
+                print(f"Top-level keys: {list(data.keys())}")
+                for key in data:
+                    val = data[key]
+                    if isinstance(val, list):
+                        print(f"  {key}: list of {len(val)}")
+                        if val:
+                            first = val[0]
+                            if isinstance(first, dict):
+                                print(f"    [0] keys: {list(first.keys())}")
+                    elif isinstance(val, dict):
+                        print(f"  {key}: dict with keys {list(val.keys())[:8]}")
+                    else:
+                        print(f"  {key}: {str(val)[:80]}")
+            else:
+                print(f"  Response: {resp.text[:200]}")
+        except Exception as e:
+            print(f"  Error: {e}")

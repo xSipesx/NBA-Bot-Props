@@ -164,7 +164,18 @@ def run_daily_pipeline(date=None):
         return
 
     # ── Step 2: Player Stats from ESPN ──
-    from ingest.espn_stats import get_starters_stats
+    from ingest.espn_stats import get_starters_stats, debug_one_player
+
+    # Debug: test ESPN API response format on first game's first team
+    from ingest.espn_stats import ESPN_TEAM_IDS, _get_team_roster
+    first_team = games[0]['home']
+    first_espn_id = ESPN_TEAM_IDS.get(first_team)
+    if first_espn_id:
+        roster = _get_team_roster(first_espn_id, first_team)
+        if roster:
+            print(f"\n🔍 DEBUG: Testing ESPN API for {roster[0]['name']} (id: {roster[0]['espn_id']})", flush=True)
+            debug_one_player(roster[0]['espn_id'])
+
     player_stats = get_starters_stats(games)
 
     # ── Step 3: Injuries ──

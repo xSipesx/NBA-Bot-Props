@@ -2,30 +2,19 @@ name: Daily NBA Props Report
 
 on:
   schedule:
-    - cron: '0 20 * * *'   # 3 PM ET — daily predictions
-    - cron: '0 15 * * *'   # 10 AM ET — grade yesterday's bets
+    - cron: '0 20 * * *'
   workflow_dispatch:
-    inputs:
-      mode:
-        description: 'Run mode'
-        required: false
-        default: 'predict'
-        type: choice
-        options:
-          - predict
-          - grade
 
 jobs:
   daily-report:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    if: >
-      (github.event_name == 'schedule' && github.event.schedule == '0 20 * * *') ||
-      (github.event_name == 'workflow_dispatch' && (github.event.inputs.mode == 'predict' || github.event.inputs.mode == ''))
+    timeout-minutes: 12
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -39,48 +28,25 @@ jobs:
       - name: Initialize database
         run: python main.py --init-db
 
-      - name: Run daily pipeline
+      - name: Run pipeline (grade yesterday + predict today)
         env:
           PYTHONUNBUFFERED: "1"
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-          EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: python -u main.py
 
-      - name: Upload report artifact
+      - name: Commit bets ledger
+        run: |
+          git config user.name "NBA Props Bot"
+          git config user.email "bot@nba-props.local"
+          git add bets_ledger.json
+          git diff --staged --quiet || git commit -m "Update bets ledger $(date +%Y-%m-%d)"
+          git push
+
+      - name: Upload report
         uses: actions/upload-artifact@v4
         with:
           name: daily-report-${{ github.run_number }}
           path: reports/
           retention-days: 90
-
-  grade-bets:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    if: >
-      (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *') ||
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'grade')
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Initialize database
-        run: python main.py --init-db
-
-      - name: Grade yesterday's bets
-        env:
-          PYTHONUNBUFFERED: "1"
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: python -u main.py --grade

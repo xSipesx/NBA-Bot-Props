@@ -1,5 +1,5 @@
 """
-NBA Props Agent — Configuration
+NBA Props Agent — Configuration v6
 """
 
 import os
@@ -19,20 +19,18 @@ SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", "")
 EMAIL_TO = os.environ.get("EMAIL_TO", "")
 
 # ── MODEL PARAMETERS ──
-SEASON_WEIGHT = 0.40
-RECENT_WEIGHT = 0.60
-RECENT_WINDOW = 10
+# Projection weighting
+SEASON_WEIGHT = 0.35
+L10_WEIGHT = 0.35
+L5_WEIGHT = 0.30
 
-B2B_DISCOUNT = -2.0
-BLOWOUT_SPREAD_THRESHOLD = 10
-BLOWOUT_DISCOUNT = -1.5
-USAGE_REDISTRIBUTION_FACTOR = 0.30
+# Edge thresholds (now using real projections, edges are genuine)
+MIN_EDGE_THRESHOLD = 0.03    # 3% minimum edge
+EDGE_LOW = 0.03              # 3-5%
+EDGE_MEDIUM = 0.05           # 5-8%
+EDGE_HIGH = 0.08             # 8%+
 
-MIN_EDGE_THRESHOLD = 0.02
-EDGE_LOW = 0.02
-EDGE_MEDIUM = 0.04
-EDGE_HIGH = 0.06
-
+# Bet sizing
 KELLY_FRACTION = 0.25
 MAX_SINGLE_BET_PCT = 0.05
 MAX_DAILY_EXPOSURE_PCT = 0.20
@@ -45,9 +43,7 @@ ODDS_REGIONS = "us"
 ODDS_MARKETS = "player_points,player_rebounds,player_assists"
 ODDS_BOOKMAKERS = "fanduel,draftkings,betmgm"
 
-NBA_API_TIMEOUT = 30
 NBA_SEASON = "2025-26"
-NBA_SEASON_ID = "22025"
 
 # ── OUTPUT ──
 CLAUDE_MODEL = "claude-sonnet-4-5-20250929"

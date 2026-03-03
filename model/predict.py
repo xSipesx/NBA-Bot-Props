@@ -1,183 +1,178 @@
 """
-NBA Props Agent — Prediction Engine v5
+NBA Props Agent — Prediction Engine v6
 
-PHILOSOPHY: We can't out-project the book using only the book's own lines.
-Instead, we find edges from:
+FUNDAMENTAL CHANGE: Uses actual player stats (from ESPN) to build
+independent projections, then compares against sportsbook lines.
 
-1. VIG EXPLOITATION: After removing the ~5% vig, lines where one side has
-   disproportionately better value (e.g., book prices over at 54% and under
-   at 51% fair → the under has a 49% true prob but only 51% implied = edge)
+Projection = weighted blend of:
+  - Season average (35%)
+  - Last 10 games (35%)
+  - Last 5 games (30%)
+  
+Adjusted for minutes trend.
 
-2. INJURY ADJUSTMENTS: When key players are ruled OUT close to game time,
-   books are slow to adjust role player props. We add a small bump for
-   teammates of injured stars.
-
-3. ROLE PLAYER INEFFICIENCY: Books set sharper lines for stars (Giannis,
-   LeBron) and looser lines for role players. We're more aggressive on
-   low-line props where the book's edge is thinner.
-
-4. CROSS-STAT CORRELATION: A player with juice favoring OVER on points
-   is likely to be more involved → slight lean on their assists too.
-
-Edges are 3-8% (realistic), not 40% (model artifact).
+Edge = Model probability vs implied probability from odds.
+Only flags plays on rotation players (20+ MPG) with meaningful lines.
 """
 
-import numpy as np
 from scipy.stats import norm
 import config
 
 
-STD_DEV_PCT = {'PTS': 0.26, 'REB': 0.32, 'AST': 0.35}
-STD_DEV_FLOOR = {'PTS': 4.0, 'REB': 1.5, 'AST': 1.5}
-MAX_CREDIBLE_EDGE = 0.12  # 12% cap — anything above is suspect
+# Minimum line thresholds — ignore tiny props nobody would bet
+MIN_LINE = {
+    'PTS': 8.5,    # ignore sub-8.5 point props
+    'REB': 2.5,    # ignore sub-2.5 rebound props
+    'AST': 1.5,    # ignore sub-1.5 assist props
+}
+
+# Minimum minutes to consider a player
+MIN_MINUTES = 20
 
 
-def predict_from_props(raw_props, games, injuries):
-    """Generate predictions for all player props."""
+def predict_from_props(raw_props, games, injuries, player_stats):
+    """
+    Generate predictions by comparing ESPN-based projections vs prop lines.
+    
+    Args:
+        raw_props: list of prop dicts from Odds API
+        games: list of game dicts
+        injuries: list of injury dicts
+        player_stats: list of player dicts from ESPN with season/recent averages
+    """
+    # Index player stats by name for fast lookup
+    stats_by_name = {}
+    for p in player_stats:
+        stats_by_name[p['name']] = p
 
-    # Build injury context
-    team_out_players = {}
+    # Build injury out list by team
+    team_outs = {}
     for inj in injuries:
-        team = inj.get('team', '')
         if inj.get('status', '').upper() in ('OUT', 'SUSPENDED'):
-            team_out_players.setdefault(team, []).append(inj)
-
-    # Group props by player to detect cross-stat signals
-    player_props = {}
-    for prop in raw_props:
-        player_props.setdefault(prop['player_name'], []).append(prop)
+            team_outs.setdefault(inj.get('team', ''), []).append(inj)
 
     predictions = []
+    skipped_no_stats = 0
+    skipped_low_line = 0
+    skipped_low_min = 0
+
     for prop in raw_props:
-        other_props = [p for p in player_props.get(prop['player_name'], [])
-                       if p['market'] != prop['market']]
-        pred = _predict_single(prop, games, team_out_players, other_props)
-        predictions.append(pred)
+        player_name = prop['player_name']
+        line = prop['line']
+        stat = prop.get('stat', 'PTS')
+        market = prop.get('market', 'player_points')
+
+        # Skip tiny props
+        if line < MIN_LINE.get(stat, 2.5):
+            skipped_low_line += 1
+            continue
+
+        # Find player stats (try exact match, then fuzzy)
+        pstats = stats_by_name.get(player_name)
+        if not pstats:
+            # Try matching by last name
+            for name, s in stats_by_name.items():
+                if player_name.split()[-1] == name.split()[-1] and player_name[0] == name[0]:
+                    pstats = s
+                    break
+
+        if not pstats:
+            skipped_no_stats += 1
+            continue
+
+        if pstats.get('min_pg', 0) < MIN_MINUTES:
+            skipped_low_min += 1
+            continue
+
+        pred = _predict_single(prop, pstats, games, team_outs)
+        if pred:
+            predictions.append(pred)
+
+    predictions.sort(key=lambda x: -abs(x.get('edge', 0)))
 
     actionable = [p for p in predictions if p['side'] != 'NO_BET']
-    over_count = len([p for p in actionable if p['side'] == 'OVER'])
-    under_count = len([p for p in actionable if p['side'] == 'UNDER'])
-    print(f"\n🎯 Predictions: {len(predictions)} total, {len(actionable)} actionable "
-          f"({over_count} OVER, {under_count} UNDER)", flush=True)
+    over_ct = len([p for p in actionable if p['side'] == 'OVER'])
+    under_ct = len([p for p in actionable if p['side'] == 'UNDER'])
+    
+    print(f"\n🎯 Predictions: {len(predictions)} analyzed, {len(actionable)} actionable "
+          f"({over_ct} OVER, {under_ct} UNDER)", flush=True)
+    print(f"   Skipped: {skipped_no_stats} no stats, {skipped_low_line} low line, "
+          f"{skipped_low_min} low minutes", flush=True)
     return predictions
 
 
-def _predict_single(prop, games, team_out_players, other_props):
+def _predict_single(prop, pstats, games, team_outs):
+    """Build a projection and compare to the line."""
     player_name = prop['player_name']
     line = prop['line']
     over_odds = prop.get('over_odds', -110)
     under_odds = prop.get('under_odds', -110)
     stat = prop.get('stat', 'PTS')
-    market = prop.get('market', 'player_points')
-    game_str = prop.get('game', '')
 
+    # Find game
+    game_str = prop.get('game', '')
     game = None
     for g in games:
         if g['home'] in game_str or g['away'] in game_str:
             game = g
             break
 
-    # ── Step 1: Calculate fair probabilities (remove vig) ──
-    impl_over_raw = _odds_to_probability(over_odds)
-    impl_under_raw = _odds_to_probability(under_odds)
-    total_impl = impl_over_raw + impl_under_raw
-    vig = total_impl - 1.0  # typically ~0.04-0.06
+    # ── Build projection from real data ──
+    stat_key = {'PTS': 'pts', 'REB': 'reb', 'AST': 'ast'}.get(stat, 'pts')
+    
+    season_avg = pstats.get(f'{stat_key}_avg', 0)
+    l10_avg = pstats.get(f'{stat_key}_l10', season_avg)
+    l5_avg = pstats.get(f'{stat_key}_l5', season_avg)
+    player_std = pstats.get(f'{stat_key}_std', 5.0)
 
-    # Fair probabilities (vig removed equally from both sides)
-    fair_over = impl_over_raw / total_impl
-    fair_under = impl_under_raw / total_impl
+    # Skip if we don't have real data
+    if season_avg == 0 and l10_avg == 0:
+        return None
 
-    # The "vig gap" is how much extra probability is loaded on each side
-    vig_on_over = impl_over_raw - fair_over
-    vig_on_under = impl_under_raw - fair_under
+    # Weighted projection
+    projection = (0.35 * season_avg) + (0.35 * l10_avg) + (0.30 * l5_avg)
 
-    # ── Step 2: Build our model probability ──
-    # Start with the fair probability as baseline
-    model_shift = 0.0  # shift in probability space, not point space
+    # Minutes trend adjustment
+    min_pg = pstats.get('min_pg', 30)
+    min_l5 = pstats.get('min_l5', min_pg)
+    if min_pg > 0:
+        min_ratio = min_l5 / min_pg
+        min_ratio = max(0.85, min(1.15, min_ratio))
+        projection *= min_ratio
 
-    # Factor A: Vig asymmetry signal
-    # When the vig is loaded more heavily on one side, the book expects
-    # that side to attract more action (i.e., the public is on that side).
-    # Fading the public has a small historical edge.
-    if vig > 0.04:  # only signal when there's meaningful vig
-        vig_diff = vig_on_over - vig_on_under
-        # If more vig on over → public is on over → slight under lean
-        # Scale: 1% vig difference → 0.5% model shift (very conservative)
-        model_shift -= vig_diff * 0.5
+    # Injury boost: if teammates are out, slight usage bump for remaining players
+    injury_adj = 0.0
+    if game:
+        player_team = pstats.get('team', '')
+        team_out_list = team_outs.get(player_team, [])
+        if len(team_out_list) >= 2 and stat == 'PTS':
+            injury_adj = projection * 0.03  # 3% scoring bump
+        if len(team_out_list) >= 4 and stat == 'PTS':
+            injury_adj = projection * 0.06  # 6% bump for decimated teams
 
-    # Factor B: Juice direction (book's lean, not public's)
-    # When fair_over >> fair_under, the book believes the over is likely.
-    # We trust this signal slightly — book has better info than us.
-    juice_direction = fair_over - fair_under
-    # A 5% book lean → 1% model lean in same direction
-    model_shift += juice_direction * 0.20
+    projection += injury_adj
+    projection = max(0.5, round(projection, 1))
 
-    # Factor C: Injury boost for teammates
-    injury_boost = 0.0
-    if game and stat == 'PTS':
-        home_outs = len(team_out_players.get(game['home'], []))
-        away_outs = len(team_out_players.get(game['away'], []))
-        # Boost remaining players when key teammates are out
-        if home_outs >= 2 or away_outs >= 2:
-            injury_boost = 0.015  # 1.5% probability boost toward over
-        if home_outs >= 4 or away_outs >= 4:
-            injury_boost = 0.025  # 2.5% boost for heavy injury games
-        model_shift += injury_boost
+    # ── Edge calculation ──
+    # Use the player's ACTUAL std dev from their game log
+    estimated_std = max(player_std, 2.0)
 
-    # Factor D: Role player inefficiency
-    # Books are less sharp on low-line props — our strongest edge source
-    line_boost = 0.0
-    if stat == 'PTS' and line <= 14:
-        line_boost = 0.015  # 1.5% edge on role player points
-    elif stat == 'PTS' and line <= 18:
-        line_boost = 0.008  # smaller edge on mid-tier players
-    elif stat in ('REB', 'AST') and line <= 4:
-        line_boost = 0.012  # 1.2% edge on low reb/ast lines
-    elif stat in ('REB', 'AST') and line <= 6:
-        line_boost = 0.006
+    prob_over = 1 - norm.cdf(line + 0.5, loc=projection, scale=estimated_std)
+    prob_under = norm.cdf(line - 0.5, loc=projection, scale=estimated_std)
 
-    # Factor E: Cross-stat correlation
-    cross_boost = 0.0
-    for other in other_props:
-        other_over = _odds_to_probability(other.get('over_odds', -110))
-        other_under = _odds_to_probability(other.get('under_odds', -110))
-        other_total = other_over + other_under
-        if other_total > 0:
-            other_fair_over = other_over / other_total
-            # If player's PTS line leans over, their AST/REB may too
-            if other_fair_over > 0.55:
-                cross_boost = 0.008  # small correlated signal
-            elif other_fair_over < 0.45:
-                cross_boost = -0.008
+    # Fair implied probabilities (vig removed)
+    impl_over = _odds_to_prob(over_odds)
+    impl_under = _odds_to_prob(under_odds)
+    total_impl = impl_over + impl_under
+    fair_over = impl_over / total_impl if total_impl > 0 else 0.5
+    fair_under = impl_under / total_impl if total_impl > 0 else 0.5
 
-    model_shift += cross_boost
+    edge_over = prob_over - fair_over
+    edge_under = prob_under - fair_under
 
-    # ── Step 3: Calculate model probabilities ──
-    model_over = fair_over + model_shift + line_boost
-    model_under = 1.0 - model_over
-
-    # Clamp to valid range
-    model_over = max(0.02, min(0.98, model_over))
-    model_under = max(0.02, min(0.98, model_under))
-
-    # ── Step 4: Calculate edges ──
-    edge_over = model_over - fair_over
-    edge_under = model_under - fair_under
-
-    # Cap edges
-    edge_over = min(edge_over, MAX_CREDIBLE_EDGE)
-    edge_under = min(edge_under, MAX_CREDIBLE_EDGE)
-
-    # Convert model probability to a "projection" for display
-    # Using inverse normal CDF to get the point projection
-    std_pct = STD_DEV_PCT.get(stat, 0.28)
-    std_floor = STD_DEV_FLOOR.get(stat, 2.0)
-    estimated_std = max(line * std_pct, std_floor)
-
-    # Projection: the point where P(X > line) = model_over
-    # This gives us a human-readable projection number
-    projection = line + estimated_std * norm.ppf(model_over) * 0.15
-    projection = max(0.0, round(projection, 1))
+    # Cap at 15% — anything higher is suspicious
+    edge_over = min(edge_over, 0.15)
+    edge_under = min(edge_under, 0.15)
 
     # Pick side
     if edge_over >= config.MIN_EDGE_THRESHOLD and edge_over > edge_under:
@@ -187,7 +182,7 @@ def _predict_single(prop, games, team_out_players, other_props):
     else:
         side, edge, odds = 'NO_BET', max(edge_over, edge_under, 0), -110
 
-    # Confidence tier
+    # Confidence
     if edge >= config.EDGE_HIGH:
         confidence = 'HIGH'
     elif edge >= config.EDGE_MEDIUM:
@@ -200,44 +195,44 @@ def _predict_single(prop, games, team_out_players, other_props):
     # Kelly sizing
     units = 0.0
     if side != 'NO_BET':
-        decimal_odds = _american_to_decimal(odds)
-        kelly = (edge / (decimal_odds - 1)) * config.KELLY_FRACTION
+        dec_odds = _american_to_decimal(odds)
+        kelly = (edge / (dec_odds - 1)) * config.KELLY_FRACTION
         kelly = max(0, min(kelly, config.MAX_SINGLE_BET_PCT))
         units = round(kelly * config.DEFAULT_BANKROLL / 100, 1)
 
     return {
         'player_name': player_name,
-        'team': prop.get('team', ''),
+        'team': pstats.get('team', ''),
         'game_id': game['game_id'] if game else '',
         'line': line,
         'stat': stat,
-        'market': market,
+        'market': prop.get('market', ''),
         'projection': projection,
-        'adjustment': round(model_shift, 4),
+        'season_avg': season_avg,
+        'l5_avg': l5_avg,
+        'l10_avg': l10_avg,
+        'player_std': round(estimated_std, 1),
+        'min_pg': pstats.get('min_pg', 0),
+        'adjustment': round(injury_adj, 1),
         'side': side,
         'edge': round(edge, 4),
         'confidence': confidence,
         'over_odds': over_odds,
         'under_odds': under_odds,
-        'prob_over': round(model_over, 3),
-        'prob_under': round(model_under, 3),
+        'prob_over': round(prob_over, 3),
+        'prob_under': round(prob_under, 3),
         'units': units,
         'bookmaker': prop.get('bookmaker', ''),
-        'juice_signal': round(juice_direction, 3),
-        'injury_shift': round(injury_boost, 3),
-        'blowout_adj': 0.0,
     }
 
 
-def _odds_to_probability(american_odds):
+def _odds_to_prob(american_odds):
     if american_odds < 0:
         return abs(american_odds) / (abs(american_odds) + 100)
-    else:
-        return 100 / (american_odds + 100)
+    return 100 / (american_odds + 100)
 
 
 def _american_to_decimal(american_odds):
     if american_odds < 0:
         return 1 + (100 / abs(american_odds))
-    else:
-        return 1 + (american_odds / 100)
+    return 1 + (american_odds / 100)

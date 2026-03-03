@@ -17,6 +17,10 @@ Your job:
 4. Override or downgrade any picks where context contradicts the stats.
 5. Note which plays are highest conviction and why.
 
+IMPORTANT: Only reference a player as OUT if they appear in the injury data marked OUT.
+Do NOT assume players are out based on projection drops — they may just be slumping.
+Use ONLY the injury data provided. Do not guess or infer injury status.
+
 Be concise and actionable. No filler. Use the player's actual stats to justify each pick.
 End with risk management notes."""
 

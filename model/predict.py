@@ -170,9 +170,8 @@ def _predict_single(prop, pstats, games, team_outs):
     edge_over = prob_over - fair_over
     edge_under = prob_under - fair_under
 
-    # Cap at 15% — anything higher is suspicious
-    edge_over = min(edge_over, 0.15)
-    edge_under = min(edge_under, 0.15)
+    # No artificial cap — with real stats, large edges are legitimate
+    # (e.g., Booker averaging 7 PPG L5 vs a 23.5 line IS a huge edge)
 
     # Pick side
     if edge_over >= config.MIN_EDGE_THRESHOLD and edge_over > edge_under:

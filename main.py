@@ -164,17 +164,26 @@ def run_daily_pipeline(date=None):
         return
 
     # ── Step 2: Player Stats from ESPN ──
-    from ingest.espn_stats import get_starters_stats, debug_one_player
+    from ingest.espn_stats import get_starters_stats, debug_one_player, _get_team_roster, _get_player_gamelog, ESPN_TEAM_IDS
 
-    # Debug: test ESPN API response format on first game's first team
-    from ingest.espn_stats import ESPN_TEAM_IDS, _get_team_roster
+    # Debug: test ESPN API on first team's first player
     first_team = games[0]['home']
     first_espn_id = ESPN_TEAM_IDS.get(first_team)
     if first_espn_id:
         roster = _get_team_roster(first_espn_id, first_team)
         if roster:
-            print(f"\n🔍 DEBUG: Testing ESPN API for {roster[0]['name']} (id: {roster[0]['espn_id']})", flush=True)
-            debug_one_player(roster[0]['espn_id'])
+            test_player = roster[0]
+            print(f"\n🔍 DEBUG: Testing {test_player['name']} (id: {test_player['espn_id']})", flush=True)
+            debug_one_player(test_player['espn_id'])
+            
+            # Also test the actual parsing function
+            result = _get_player_gamelog(test_player['espn_id'], test_player['name'])
+            if result:
+                print(f"\n✅ PARSE SUCCESS: {test_player['name']}", flush=True)
+                print(f"   min_pg={result['min_pg']} pts_avg={result['pts_avg']} reb_avg={result['reb_avg']} ast_avg={result['ast_avg']}", flush=True)
+                print(f"   pts_l5={result['pts_l5']} pts_std={result['pts_std']} gp={result['gp']}", flush=True)
+            else:
+                print(f"\n❌ PARSE FAILED for {test_player['name']}", flush=True)
 
     player_stats = get_starters_stats(games)
 

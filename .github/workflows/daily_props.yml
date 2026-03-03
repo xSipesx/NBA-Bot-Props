@@ -37,12 +37,13 @@ jobs:
         run: python -u main.py
 
       - name: Commit bets ledger
+        continue-on-error: true
         run: |
           git config user.name "NBA Props Bot"
           git config user.email "bot@nba-props.local"
           git add bets_ledger.json
           git diff --staged --quiet || git commit -m "Update bets ledger $(date +%Y-%m-%d)"
-          git push
+          git push || sleep 5 && git push || echo "⚠️ Ledger push failed — will retry next run"
 
       - name: Upload report
         uses: actions/upload-artifact@v4

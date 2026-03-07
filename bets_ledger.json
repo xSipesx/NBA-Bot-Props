@@ -4229,9 +4229,9 @@
       "units": 0.5,
       "projection": 25.3,
       "season_avg": 26.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 15.0,
+      "pnl": 0.41
     },
     {
       "date": "2026-03-06",
@@ -4246,9 +4246,9 @@
       "units": 0.5,
       "projection": 6.5,
       "season_avg": 5.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 7.0,
+      "pnl": 0.42
     },
     {
       "date": "2026-03-06",
@@ -4263,9 +4263,9 @@
       "units": 0.5,
       "projection": 14.5,
       "season_avg": 23.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 32.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4280,9 +4280,9 @@
       "units": 0.5,
       "projection": 8.5,
       "season_avg": 8.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 12.0,
+      "pnl": 0.31
     },
     {
       "date": "2026-03-06",
@@ -4297,9 +4297,9 @@
       "units": 0.5,
       "projection": 6.5,
       "season_avg": 6.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 3.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4314,9 +4314,9 @@
       "units": 0.5,
       "projection": 17.1,
       "season_avg": 13.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 11.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4331,9 +4331,9 @@
       "units": 0.5,
       "projection": 14.9,
       "season_avg": 10.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 7.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4348,9 +4348,9 @@
       "units": 0.5,
       "projection": 6.5,
       "season_avg": 4.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 4.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4365,9 +4365,9 @@
       "units": 0.5,
       "projection": 23.2,
       "season_avg": 20.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 16.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4382,9 +4382,9 @@
       "units": 0.5,
       "projection": 22.5,
       "season_avg": 17.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 19.0,
+      "pnl": 0.49
     },
     {
       "date": "2026-03-06",
@@ -4399,9 +4399,9 @@
       "units": 0.5,
       "projection": 7.4,
       "season_avg": 4.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 9.0,
+      "pnl": 0.55
     },
     {
       "date": "2026-03-06",
@@ -4416,9 +4416,9 @@
       "units": 0.5,
       "projection": 16.9,
       "season_avg": 17.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 3.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4433,9 +4433,9 @@
       "units": 0.5,
       "projection": 3.9,
       "season_avg": 2.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.55
     },
     {
       "date": "2026-03-06",
@@ -4450,9 +4450,9 @@
       "units": 0.5,
       "projection": 3.5,
       "season_avg": 5.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 4.0,
+      "pnl": 0.47
     },
     {
       "date": "2026-03-06",
@@ -4467,9 +4467,9 @@
       "units": 0.5,
       "projection": 14.2,
       "season_avg": 13.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 8.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4484,9 +4484,9 @@
       "units": 0.5,
       "projection": 20.4,
       "season_avg": 13.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 17.0,
+      "pnl": 0.45
     },
     {
       "date": "2026-03-06",
@@ -4501,9 +4501,9 @@
       "units": 0.5,
       "projection": 16.5,
       "season_avg": 11.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 10.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4518,9 +4518,9 @@
       "units": 0.5,
       "projection": 2.1,
       "season_avg": 3.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 3.0,
+      "pnl": 0.47
     },
     {
       "date": "2026-03-06",
@@ -4535,9 +4535,9 @@
       "units": 0.5,
       "projection": 15.7,
       "season_avg": 14.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 5.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4552,9 +4552,9 @@
       "units": 0.5,
       "projection": 3.5,
       "season_avg": 1.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 1.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4569,9 +4569,9 @@
       "units": 0.5,
       "projection": 8.5,
       "season_avg": 11.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 13.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4586,9 +4586,9 @@
       "units": 0.5,
       "projection": 22.0,
       "season_avg": 16.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 20.0,
+      "pnl": 0.46
     },
     {
       "date": "2026-03-06",
@@ -4603,9 +4603,9 @@
       "units": 0.5,
       "projection": 28.6,
       "season_avg": 31.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 44.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4620,9 +4620,9 @@
       "units": 0.5,
       "projection": 18.2,
       "season_avg": 23.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 26.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4637,9 +4637,9 @@
       "units": 0.4,
       "projection": 12.3,
       "season_avg": 9.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 16.0,
+      "pnl": 0.37
     },
     {
       "date": "2026-03-06",
@@ -4654,9 +4654,9 @@
       "units": 0.3,
       "projection": 4.4,
       "season_avg": 3.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 0.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4671,9 +4671,9 @@
       "units": 0.5,
       "projection": 17.4,
       "season_avg": 15.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 13.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4688,9 +4688,9 @@
       "units": 0.4,
       "projection": 2.5,
       "season_avg": 2.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.44
     },
     {
       "date": "2026-03-06",
@@ -4705,9 +4705,9 @@
       "units": 0.5,
       "projection": 18.6,
       "season_avg": 23.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 19.0,
+      "pnl": 0.41
     },
     {
       "date": "2026-03-06",
@@ -4722,9 +4722,9 @@
       "units": 0.4,
       "projection": 12.1,
       "season_avg": 16.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 18.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-03-06",
@@ -4739,9 +4739,9 @@
       "units": 0.4,
       "projection": 11.3,
       "season_avg": 9.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 4.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-03-06",
@@ -4756,9 +4756,9 @@
       "units": 0.3,
       "projection": 3.4,
       "season_avg": 2.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.36
     },
     {
       "date": "2026-03-06",
@@ -4773,9 +4773,9 @@
       "units": 0.4,
       "projection": 14.2,
       "season_avg": 12.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 8.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-03-06",
@@ -4790,9 +4790,9 @@
       "units": 0.5,
       "projection": 4.1,
       "season_avg": 3.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 1.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-03-06",
@@ -4807,9 +4807,9 @@
       "units": 0.5,
       "projection": 3.9,
       "season_avg": 3.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 3.0,
+      "pnl": 0.38
     },
     {
       "date": "2026-03-06",
@@ -4824,9 +4824,9 @@
       "units": 0.3,
       "projection": 17.1,
       "season_avg": 19.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 21.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4841,9 +4841,9 @@
       "units": 0.3,
       "projection": 5.6,
       "season_avg": 4.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 1.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4858,9 +4858,9 @@
       "units": 0.3,
       "projection": 4.5,
       "season_avg": 3.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 3.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4875,9 +4875,9 @@
       "units": 0.3,
       "projection": 13.4,
       "season_avg": 10.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 7.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4892,9 +4892,9 @@
       "units": 0.3,
       "projection": 7.0,
       "season_avg": 9.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 11.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4909,9 +4909,9 @@
       "units": 0.4,
       "projection": 7.8,
       "season_avg": 8.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.31
     },
     {
       "date": "2026-03-06",
@@ -4926,9 +4926,9 @@
       "units": 0.5,
       "projection": 6.4,
       "season_avg": 6.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 8.0,
+      "pnl": 0.31
     },
     {
       "date": "2026-03-06",
@@ -4943,9 +4943,9 @@
       "units": 0.3,
       "projection": 7.3,
       "season_avg": 7.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 9.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4960,9 +4960,9 @@
       "units": 0.3,
       "projection": 4.5,
       "season_avg": 3.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 2.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -4977,9 +4977,9 @@
       "units": 0.3,
       "projection": 15.5,
       "season_avg": 15.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 15.0,
+      "pnl": 0.28
     },
     {
       "date": "2026-03-06",
@@ -4994,9 +4994,9 @@
       "units": 0.3,
       "projection": 29.9,
       "season_avg": 28.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 38.0,
+      "pnl": 0.26
     },
     {
       "date": "2026-03-06",
@@ -5011,9 +5011,9 @@
       "units": 0.4,
       "projection": 4.0,
       "season_avg": 3.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 3.0,
+      "pnl": 0.26
     },
     {
       "date": "2026-03-06",
@@ -5028,9 +5028,9 @@
       "units": 0.2,
       "projection": 5.2,
       "season_avg": 4.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 4.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5045,9 +5045,9 @@
       "units": 0.3,
       "projection": 15.7,
       "season_avg": 13.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 25.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5062,9 +5062,9 @@
       "units": 0.3,
       "projection": 3.3,
       "season_avg": 2.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 0.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5079,9 +5079,9 @@
       "units": 0.3,
       "projection": 21.8,
       "season_avg": 18.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 24.0,
+      "pnl": 0.28
     },
     {
       "date": "2026-03-06",
@@ -5096,9 +5096,9 @@
       "units": 0.4,
       "projection": 4.7,
       "season_avg": 5.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 9.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-03-06",
@@ -5113,9 +5113,9 @@
       "units": 0.4,
       "projection": 6.7,
       "season_avg": 4.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 6.0,
+      "pnl": 0.28
     },
     {
       "date": "2026-03-06",
@@ -5130,9 +5130,9 @@
       "units": 0.4,
       "projection": 8.6,
       "season_avg": 12.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 10.0,
+      "pnl": 0.29
     },
     {
       "date": "2026-03-06",
@@ -5147,9 +5147,9 @@
       "units": 0.3,
       "projection": 10.3,
       "season_avg": 11.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.24
     },
     {
       "date": "2026-03-06",
@@ -5164,9 +5164,9 @@
       "units": 0.3,
       "projection": 12.4,
       "season_avg": 17.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 12.0,
+      "pnl": 0.29
     },
     {
       "date": "2026-03-06",
@@ -5181,9 +5181,9 @@
       "units": 0.3,
       "projection": 4.5,
       "season_avg": 6.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.3
     },
     {
       "date": "2026-03-06",
@@ -5198,9 +5198,9 @@
       "units": 0.3,
       "projection": 4.6,
       "season_avg": 4.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 2.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5215,9 +5215,9 @@
       "units": 0.3,
       "projection": 11.7,
       "season_avg": 10.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 10.0,
+      "pnl": 0.27
     },
     {
       "date": "2026-03-06",
@@ -5232,9 +5232,9 @@
       "units": 0.3,
       "projection": 24.3,
       "season_avg": 26.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 30.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5249,9 +5249,9 @@
       "units": 0.2,
       "projection": 4.4,
       "season_avg": 3.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.19
     },
     {
       "date": "2026-03-06",
@@ -5266,9 +5266,9 @@
       "units": 0.3,
       "projection": 5.8,
       "season_avg": 4.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 7.0,
+      "pnl": 0.25
     },
     {
       "date": "2026-03-06",
@@ -5283,9 +5283,9 @@
       "units": 0.3,
       "projection": 23.5,
       "season_avg": 25.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 9.0,
+      "pnl": 0.25
     },
     {
       "date": "2026-03-06",
@@ -5300,9 +5300,9 @@
       "units": 0.2,
       "projection": 4.3,
       "season_avg": 3.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 2.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5317,9 +5317,9 @@
       "units": 0.2,
       "projection": 12.9,
       "season_avg": 10.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 11.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5334,9 +5334,9 @@
       "units": 0.3,
       "projection": 6.7,
       "season_avg": 6.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 10.0,
+      "pnl": 0.25
     },
     {
       "date": "2026-03-06",
@@ -5351,9 +5351,9 @@
       "units": 0.3,
       "projection": 6.7,
       "season_avg": 8.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 13.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5368,9 +5368,9 @@
       "units": 0.2,
       "projection": 6.5,
       "season_avg": 7.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.19
     },
     {
       "date": "2026-03-06",
@@ -5385,9 +5385,9 @@
       "units": 0.2,
       "projection": 13.7,
       "season_avg": 16.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 6.0,
+      "pnl": 0.18
     },
     {
       "date": "2026-03-06",
@@ -5402,9 +5402,9 @@
       "units": 0.4,
       "projection": 4.1,
       "season_avg": 4.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 6.0,
+      "pnl": 0.24
     },
     {
       "date": "2026-03-06",
@@ -5419,9 +5419,9 @@
       "units": 0.2,
       "projection": 19.7,
       "season_avg": 20.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 22.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5436,9 +5436,9 @@
       "units": 0.2,
       "projection": 12.3,
       "season_avg": 13.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 12.0,
+      "pnl": 0.17
     },
     {
       "date": "2026-03-06",
@@ -5453,9 +5453,9 @@
       "units": 0.3,
       "projection": 15.2,
       "season_avg": 17.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 26.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5470,9 +5470,9 @@
       "units": 0.2,
       "projection": 14.1,
       "season_avg": 18.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 13.0,
+      "pnl": 0.19
     },
     {
       "date": "2026-03-06",
@@ -5487,9 +5487,9 @@
       "units": 0.3,
       "projection": 13.5,
       "season_avg": 11.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 8.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5504,9 +5504,9 @@
       "units": 0.3,
       "projection": 14.5,
       "season_avg": 17.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 19.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5521,9 +5521,9 @@
       "units": 0.1,
       "projection": 1.7,
       "season_avg": 1.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 1.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5538,9 +5538,9 @@
       "units": 0.2,
       "projection": 14.8,
       "season_avg": 14.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 11.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5555,9 +5555,9 @@
       "units": 0.2,
       "projection": 4.0,
       "season_avg": 3.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 9.0,
+      "pnl": 0.25
     },
     {
       "date": "2026-03-06",
@@ -5572,9 +5572,9 @@
       "units": 0.2,
       "projection": 10.2,
       "season_avg": 9.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 12.0,
+      "pnl": 0.22
     },
     {
       "date": "2026-03-06",
@@ -5589,9 +5589,9 @@
       "units": 0.2,
       "projection": 21.0,
       "season_avg": 18.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 21.0,
+      "pnl": 0.16
     },
     {
       "date": "2026-03-06",
@@ -5606,9 +5606,9 @@
       "units": 0.3,
       "projection": 4.2,
       "season_avg": 4.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 6.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-03-06",
@@ -5623,9 +5623,9 @@
       "units": 0.3,
       "projection": 3.1,
       "season_avg": 3.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 4.0,
+      "pnl": 0.19
     },
     {
       "date": "2026-03-06",
@@ -5640,9 +5640,9 @@
       "units": 0.2,
       "projection": 11.5,
       "season_avg": 9.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 11.0,
+      "pnl": 0.16
     },
     {
       "date": "2026-03-06",
@@ -5657,9 +5657,9 @@
       "units": 0.2,
       "projection": 17.7,
       "season_avg": 17.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 20.0,
+      "pnl": 0.2
     },
     {
       "date": "2026-03-06",
@@ -5674,9 +5674,9 @@
       "units": 0.2,
       "projection": 4.1,
       "season_avg": 2.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 3.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5691,9 +5691,9 @@
       "units": 0.2,
       "projection": 10.3,
       "season_avg": 8.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 6.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5708,9 +5708,9 @@
       "units": 0.1,
       "projection": 2.8,
       "season_avg": 2.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 2.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5725,7 +5725,7 @@
       "units": 0.2,
       "projection": 3.4,
       "season_avg": 2.8,
-      "result": null,
+      "result": "DNP",
       "actual": null,
       "pnl": null
     },
@@ -5742,9 +5742,9 @@
       "units": 0.2,
       "projection": 17.9,
       "season_avg": 19.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 27.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5759,9 +5759,9 @@
       "units": 0.2,
       "projection": 4.7,
       "season_avg": 6.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 2.0,
+      "pnl": 0.19
     },
     {
       "date": "2026-03-06",
@@ -5776,9 +5776,9 @@
       "units": 0.1,
       "projection": 4.8,
       "season_avg": 6.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 7.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5793,9 +5793,9 @@
       "units": 0.2,
       "projection": 3.2,
       "season_avg": 3.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 3.0,
+      "pnl": 0.11
     },
     {
       "date": "2026-03-06",
@@ -5810,9 +5810,9 @@
       "units": 0.1,
       "projection": 19.4,
       "season_avg": 17.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 12.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5827,9 +5827,9 @@
       "units": 0.2,
       "projection": 9.9,
       "season_avg": 11.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 18.0,
+      "pnl": -0.2
     },
     {
       "date": "2026-03-06",
@@ -5844,9 +5844,9 @@
       "units": 0.1,
       "projection": 3.8,
       "season_avg": 4.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 3.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5861,9 +5861,9 @@
       "units": 0.1,
       "projection": 8.4,
       "season_avg": 5.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 13.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5878,9 +5878,9 @@
       "units": 0.1,
       "projection": 6.8,
       "season_avg": 6.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 5.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5895,9 +5895,9 @@
       "units": 0.1,
       "projection": 3.9,
       "season_avg": 3.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 4.0,
+      "pnl": 0.12
     },
     {
       "date": "2026-03-06",
@@ -5912,9 +5912,9 @@
       "units": 0.2,
       "projection": 7.8,
       "season_avg": 6.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 7.0,
+      "pnl": 0.14
     },
     {
       "date": "2026-03-06",
@@ -5929,9 +5929,9 @@
       "units": 0.1,
       "projection": 25.2,
       "season_avg": 27.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 24.0,
+      "pnl": 0.08
     },
     {
       "date": "2026-03-06",
@@ -5946,9 +5946,9 @@
       "units": 0.1,
       "projection": 4.0,
       "season_avg": 3.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 4.0,
+      "pnl": 0.11
     },
     {
       "date": "2026-03-06",
@@ -5963,9 +5963,9 @@
       "units": 0.1,
       "projection": 4.3,
       "season_avg": 3.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 4.0,
+      "pnl": 0.08
     },
     {
       "date": "2026-03-06",
@@ -5980,9 +5980,9 @@
       "units": 0.1,
       "projection": 18.3,
       "season_avg": 21.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 22.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -5997,9 +5997,9 @@
       "units": 0.1,
       "projection": 3.5,
       "season_avg": 4.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 8.0,
+      "pnl": -0.1
     },
     {
       "date": "2026-03-06",
@@ -6014,9 +6014,9 @@
       "units": 0.1,
       "projection": 1.5,
       "season_avg": 1.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 1.0,
+      "pnl": 0.07
     },
     {
       "date": "2026-03-06",
@@ -6031,9 +6031,9 @@
       "units": 0.1,
       "projection": 4.4,
       "season_avg": 4.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.08
     },
     {
       "date": "2026-03-06",
@@ -6048,9 +6048,9 @@
       "units": 0.1,
       "projection": 5.0,
       "season_avg": 3.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 6.0,
+      "pnl": 0.1
     },
     {
       "date": "2026-03-06",
@@ -6065,6 +6065,1315 @@
       "units": 0.1,
       "projection": 13.5,
       "season_avg": 12.9,
+      "result": "WIN",
+      "actual": 16.0,
+      "pnl": 0.08
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jaylin Williams",
+      "team": "OKC",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 8.5,
+      "odds": 110,
+      "edge": 0.5364,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 3.2,
+      "season_avg": 4.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Walter Clayton Jr.",
+      "team": "ORL",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 4.5,
+      "odds": 118,
+      "edge": 0.4131,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 2.0,
+      "season_avg": 2.1,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Donte DiVincenzo",
+      "team": "MIN",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 8.5,
+      "odds": 102,
+      "edge": 0.3099,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 13.1,
+      "season_avg": 12.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Julius Randle",
+      "team": "MIN",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 10.5,
+      "odds": -158,
+      "edge": 0.3052,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 7.1,
+      "season_avg": 6.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jalen Johnson",
+      "team": "ATL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 21.5,
+      "odds": 102,
+      "edge": 0.303,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 14.5,
+      "season_avg": 21.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jaden McDaniels",
+      "team": "MIN",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 9.5,
+      "odds": -110,
+      "edge": 0.2846,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 15.2,
+      "season_avg": 15.1,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Anthony Edwards",
+      "team": "MIN",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 38.5,
+      "odds": -118,
+      "edge": 0.2765,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 29.8,
+      "season_avg": 28.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Ty Jerome",
+      "team": "MEM",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 16.5,
+      "odds": 102,
+      "edge": 0.2606,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 19.6,
+      "season_avg": 19.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Quentin Grimes",
+      "team": "PHI",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 14.5,
+      "odds": -120,
+      "edge": 0.2541,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 9.3,
+      "season_avg": 12.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Cason Wallace",
+      "team": "OKC",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 3.5,
+      "odds": 128,
+      "edge": 0.2388,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 4.8,
+      "season_avg": 2.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jalen Johnson",
+      "team": "ATL",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 10.5,
+      "odds": -128,
+      "edge": 0.2267,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 7.3,
+      "season_avg": 10.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Brandin Podziemski",
+      "team": "GSW",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 6.5,
+      "odds": -114,
+      "edge": 0.2233,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 8.6,
+      "season_avg": 5.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Walter Clayton Jr.",
+      "team": "ORL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 8.5,
+      "odds": -112,
+      "edge": 0.2133,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 12.0,
+      "season_avg": 11.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Al Horford",
+      "team": "GSW",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 9.5,
+      "odds": -132,
+      "edge": 0.2109,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 13.2,
+      "season_avg": 8.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Rudy Gobert",
+      "team": "MIN",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 11.5,
+      "odds": -104,
+      "edge": 0.2057,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 13.7,
+      "season_avg": 11.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Tyrese Maxey",
+      "team": "PHI",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 31.5,
+      "odds": -113,
+      "edge": 0.2038,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 25.7,
+      "season_avg": 27.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "G.G. Jackson",
+      "team": "MEM",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 13.5,
+      "odds": 102,
+      "edge": 0.1827,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 16.6,
+      "season_avg": 10.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Keyonte George",
+      "team": "UTA",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 5.5,
+      "odds": -112,
+      "edge": 0.1827,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 3.9,
+      "season_avg": 6.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jalen Johnson",
+      "team": "ATL",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 7.5,
+      "odds": -115,
+      "edge": 0.1823,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 5.3,
+      "season_avg": 7.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Paolo Banchero",
+      "team": "ORL",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 3.5,
+      "odds": -162,
+      "edge": 0.1732,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 5.7,
+      "season_avg": 5.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Kobe Sanders",
+      "team": "LAC",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 3.5,
+      "odds": -146,
+      "edge": 0.1709,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 1.8,
+      "season_avg": 2.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jaylin Williams",
+      "team": "OKC",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 12.5,
+      "odds": -102,
+      "edge": 0.1701,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 15.0,
+      "season_avg": 17.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Ty Jerome",
+      "team": "MEM",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": 134,
+      "edge": 0.1669,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 5.4,
+      "season_avg": 5.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Al Horford",
+      "team": "GSW",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 2.5,
+      "odds": -109,
+      "edge": 0.1605,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 3.8,
+      "season_avg": 2.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Tobias Harris",
+      "team": "DET",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": -162,
+      "edge": 0.148,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 6.6,
+      "season_avg": 5.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Zaccharie Risacher",
+      "team": "ATL",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 3.5,
+      "odds": 118,
+      "edge": 0.1423,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 4.4,
+      "season_avg": 3.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Quentin Grimes",
+      "team": "PHI",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 3.5,
+      "odds": -122,
+      "edge": 0.14,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 2.1,
+      "season_avg": 3.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Brandin Podziemski",
+      "team": "GSW",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 15.5,
+      "odds": -118,
+      "edge": 0.1377,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 18.1,
+      "season_avg": 12.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Nolan Traore",
+      "team": "BKN",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 10.5,
+      "odds": 100,
+      "edge": 0.1358,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 12.6,
+      "season_avg": 8.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Kyle Kuzma",
+      "team": "MIL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 9.5,
+      "odds": -130,
+      "edge": 0.1316,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 12.8,
+      "season_avg": 13.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Tristan da Silva",
+      "team": "ORL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 10.5,
+      "odds": 100,
+      "edge": 0.131,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 12.5,
+      "season_avg": 9.1,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Julius Randle",
+      "team": "MIN",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 3.5,
+      "odds": -125,
+      "edge": 0.1253,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 5.0,
+      "season_avg": 5.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Brook Lopez",
+      "team": "LAC",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 10.5,
+      "odds": -130,
+      "edge": 0.1225,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 13.4,
+      "season_avg": 7.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Julius Randle",
+      "team": "MIN",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 15.5,
+      "odds": -102,
+      "edge": 0.1215,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 17.7,
+      "season_avg": 21.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Ryan Rollins",
+      "team": "MIL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 17.5,
+      "odds": -108,
+      "edge": 0.1186,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 15.2,
+      "season_avg": 16.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Nicolas Claxton",
+      "team": "BKN",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 10.5,
+      "odds": 104,
+      "edge": 0.1147,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 11.9,
+      "season_avg": 12.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Desmond Bane",
+      "team": "ORL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 21.5,
+      "odds": -106,
+      "edge": 0.1108,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 23.9,
+      "season_avg": 20.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Dominick Barlow",
+      "team": "PHI",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 8.5,
+      "odds": -108,
+      "edge": 0.1071,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 6.8,
+      "season_avg": 8.1,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Ace Bailey",
+      "team": "UTA",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 16.5,
+      "odds": -106,
+      "edge": 0.0995,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 18.4,
+      "season_avg": 12.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Keyonte George",
+      "team": "UTA",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 23.5,
+      "odds": -125,
+      "edge": 0.0975,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 20.3,
+      "season_avg": 24.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Tristan da Silva",
+      "team": "ORL",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": -104,
+      "edge": 0.0962,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 5.4,
+      "season_avg": 3.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Bennedict Mathurin",
+      "team": "LAC",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 17.5,
+      "odds": -130,
+      "edge": 0.096,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 14.5,
+      "season_avg": 17.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Danny Wolf",
+      "team": "BKN",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 9.5,
+      "odds": -104,
+      "edge": 0.0953,
+      "confidence": "HIGH",
+      "units": 0.2,
+      "projection": 11.1,
+      "season_avg": 8.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jaden McDaniels",
+      "team": "MIN",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 5.5,
+      "odds": -118,
+      "edge": 0.0926,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 4.5,
+      "season_avg": 4.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Donte DiVincenzo",
+      "team": "MIN",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 2.5,
+      "odds": -162,
+      "edge": 0.0873,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 3.9,
+      "season_avg": 4.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Cason Wallace",
+      "team": "OKC",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 10.5,
+      "odds": -108,
+      "edge": 0.0857,
+      "confidence": "HIGH",
+      "units": 0.2,
+      "projection": 12.1,
+      "season_avg": 8.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Tyrese Maxey",
+      "team": "PHI",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 6.5,
+      "odds": 112,
+      "edge": 0.0809,
+      "confidence": "HIGH",
+      "units": 0.2,
+      "projection": 5.8,
+      "season_avg": 6.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Darius Garland",
+      "team": "LAC",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 14.5,
+      "odds": -106,
+      "edge": 0.0785,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 16.0,
+      "season_avg": 17.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Bobby Portis",
+      "team": "MIL",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 5.5,
+      "odds": -106,
+      "edge": 0.0674,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 4.6,
+      "season_avg": 6.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Cam Thomas",
+      "team": "MIL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 13.5,
+      "odds": -130,
+      "edge": 0.0667,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 10.6,
+      "season_avg": 14.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Brice Sensabaugh",
+      "team": "UTA",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 16.5,
+      "odds": -128,
+      "edge": 0.0664,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 14.1,
+      "season_avg": 12.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Cam Spencer",
+      "team": "MEM",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": 114,
+      "edge": 0.0635,
+      "confidence": "MEDIUM",
+      "units": 0.1,
+      "projection": 5.0,
+      "season_avg": 5.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Giannis Antetokounmpo",
+      "team": "MIL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 26.5,
+      "odds": -130,
+      "edge": 0.0635,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 24.1,
+      "season_avg": 27.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Kawhi Leonard",
+      "team": "LAC",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 26.5,
+      "odds": -102,
+      "edge": 0.0632,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 25.2,
+      "season_avg": 27.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jaylen Wells",
+      "team": "MEM",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 1.5,
+      "odds": 160,
+      "edge": 0.062,
+      "confidence": "MEDIUM",
+      "units": 0.1,
+      "projection": 1.6,
+      "season_avg": 1.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jaylen Wells",
+      "team": "MEM",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 12.5,
+      "odds": -125,
+      "edge": 0.0587,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 14.1,
+      "season_avg": 12.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Anthony Edwards",
+      "team": "MIN",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": 120,
+      "edge": 0.0578,
+      "confidence": "MEDIUM",
+      "units": 0.1,
+      "projection": 4.9,
+      "season_avg": 5.1,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Brandin Podziemski",
+      "team": "GSW",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 3.5,
+      "odds": -138,
+      "edge": 0.0568,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 4.6,
+      "season_avg": 3.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jalen Duren",
+      "team": "DET",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 10.5,
+      "odds": -120,
+      "edge": 0.056,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 11.8,
+      "season_avg": 10.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Shai Gilgeous-Alexander",
+      "team": "OKC",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 31.5,
+      "odds": -112,
+      "edge": 0.0536,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 30.2,
+      "season_avg": 31.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Luguentz Dort",
+      "team": "OKC",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 9.5,
+      "odds": -118,
+      "edge": 0.0519,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 8.3,
+      "season_avg": 8.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Draymond Green",
+      "team": "GSW",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 9.5,
+      "odds": -128,
+      "edge": 0.0503,
+      "confidence": "MEDIUM",
+      "units": 0.2,
+      "projection": 8.1,
+      "season_avg": 8.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "G.G. Jackson",
+      "team": "MEM",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 5.5,
+      "odds": -130,
+      "edge": 0.0486,
+      "confidence": "LOW",
+      "units": 0.2,
+      "projection": 6.6,
+      "season_avg": 4.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Kyle Filipowski",
+      "team": "UTA",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 8.5,
+      "odds": 112,
+      "edge": 0.0475,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 8.9,
+      "season_avg": 6.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Jalen Suggs",
+      "team": "ORL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 9.5,
+      "odds": -118,
+      "edge": 0.047,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 10.8,
+      "season_avg": 13.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Naz Reid",
+      "team": "MIN",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 11.5,
+      "odds": -112,
+      "edge": 0.0459,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 10.3,
+      "season_avg": 13.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Kawhi Leonard",
+      "team": "LAC",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 6.5,
+      "odds": 106,
+      "edge": 0.0458,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 6.0,
+      "season_avg": 6.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "G.G. Jackson",
+      "team": "MEM",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 1.5,
+      "odds": 115,
+      "edge": 0.0434,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 1.9,
+      "season_avg": 1.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Ace Bailey",
+      "team": "UTA",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": -110,
+      "edge": 0.0433,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 5.2,
+      "season_avg": 4.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Shai Gilgeous-Alexander",
+      "team": "OKC",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 4.5,
+      "odds": 122,
+      "edge": 0.0423,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 4.2,
+      "season_avg": 4.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Shai Gilgeous-Alexander",
+      "team": "OKC",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 6.5,
+      "odds": -130,
+      "edge": 0.0409,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 7.4,
+      "season_avg": 6.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Cedric Coward",
+      "team": "MEM",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 10.5,
+      "odds": -110,
+      "edge": 0.0402,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 9.6,
+      "season_avg": 13.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Nolan Traore",
+      "team": "BKN",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": 110,
+      "edge": 0.0363,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 4.9,
+      "season_avg": 3.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Quentin Grimes",
+      "team": "PHI",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 3.5,
+      "odds": -130,
+      "edge": 0.0359,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 2.6,
+      "season_avg": 3.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Paolo Banchero",
+      "team": "ORL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 25.5,
+      "odds": -106,
+      "edge": 0.0353,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 24.7,
+      "season_avg": 22.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Kris Dunn",
+      "team": "LAC",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 3.5,
+      "odds": -152,
+      "edge": 0.0352,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 4.5,
+      "season_avg": 3.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-03-07",
+      "player_name": "Onyeka Okongwu",
+      "team": "ATL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 15.5,
+      "odds": -125,
+      "edge": 0.0312,
+      "confidence": "LOW",
+      "units": 0.1,
+      "projection": 14.1,
+      "season_avg": 16.2,
       "result": null,
       "actual": null,
       "pnl": null
@@ -6329,6 +7638,124 @@
         "\u2705 Tre Jones AST: 5 vs 5.5 UNDER \u2192 WIN (+0.1u)"
       ],
       "hit_rate": 0.429
+    },
+    {
+      "date": "2026-03-06",
+      "wins": 53,
+      "losses": 55,
+      "pushes": 0,
+      "pnl": -3.23,
+      "details": [
+        "\u2705 Jayson Tatum PTS: 15 vs 11.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Jayson Tatum AST: 7 vs 2.5 OVER \u2192 WIN (+0.4u)",
+        "\u274c Devin Booker PTS: 32 vs 23.5 UNDER \u2192 LOSS (-0.5u)",
+        "\u2705 Jayson Tatum REB: 12 vs 3.5 OVER \u2192 WIN (+0.3u)",
+        "\u274c Aaron Gordon REB: 3 vs 3.5 OVER \u2192 LOSS (-0.5u)",
+        "\u274c Brandon Williams PTS: 11 vs 11.5 OVER \u2192 LOSS (-0.5u)",
+        "\u274c Christian Braun PTS: 7 vs 10.5 OVER \u2192 LOSS (-0.5u)",
+        "\u274c Christian Braun REB: 4 vs 4.5 OVER \u2192 LOSS (-0.5u)",
+        "\u274c Cooper Flagg PTS: 16 vs 17.5 OVER \u2192 LOSS (-0.5u)",
+        "\u2705 Saddiq Bey PTS: 19 vs 17.5 OVER \u2192 WIN (+0.5u)",
+        "\u2705 Jarace Walker REB: 9 vs 5.5 OVER \u2192 WIN (+0.6u)",
+        "\u274c Aaron Gordon PTS: 3 vs 11.5 OVER \u2192 LOSS (-0.5u)",
+        "\u2705 Jarace Walker AST: 5 vs 2.5 OVER \u2192 WIN (+0.6u)",
+        "\u2705 Devin Booker AST: 4 vs 5.5 UNDER \u2192 WIN (+0.5u)",
+        "\u274c Jeremiah Fears PTS: 8 vs 10.5 OVER \u2192 LOSS (-0.5u)",
+        "\u2705 Reed Sheppard PTS: 17 vs 16.5 OVER \u2192 WIN (+0.5u)",
+        "\u274c Jarace Walker PTS: 10 vs 12.5 OVER \u2192 LOSS (-0.5u)",
+        "\u2705 Rui Hachimura REB: 3 vs 3.5 UNDER \u2192 WIN (+0.5u)",
+        "\u274c P.J. Washington PTS: 5 vs 12.5 OVER \u2192 LOSS (-0.5u)",
+        "\u274c Moussa Diabate AST: 1 vs 1.5 OVER \u2192 LOSS (-0.5u)",
+        "\u274c Rui Hachimura PTS: 13 vs 12.5 UNDER \u2192 LOSS (-0.5u)",
+        "\u2705 Jrue Holiday PTS: 20 vs 18.5 OVER \u2192 WIN (+0.5u)",
+        "\u274c Luka Doncic PTS: 44 vs 33.5 UNDER \u2192 LOSS (-0.5u)",
+        "\u274c Pascal Siakam PTS: 26 vs 22.5 UNDER \u2192 LOSS (-0.5u)",
+        "\u2705 Jay Huff PTS: 16 vs 9.5 OVER \u2192 WIN (+0.4u)",
+        "\u274c Jeremiah Fears REB: 0 vs 3.5 OVER \u2192 LOSS (-0.3u)",
+        "\u274c Naji Marshall PTS: 13 vs 13.5 OVER \u2192 LOSS (-0.5u)",
+        "\u2705 Cameron Johnson AST: 5 vs 1.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Austin Reaves PTS: 19 vs 23.5 UNDER \u2192 WIN (+0.4u)",
+        "\u274c Payton Pritchard PTS: 18 vs 15.5 UNDER \u2192 LOSS (-0.4u)",
+        "\u274c Kel'el Ware REB: 4 vs 9.5 OVER \u2192 LOSS (-0.4u)",
+        "\u2705 Christian Braun AST: 5 vs 2.5 OVER \u2192 WIN (+0.4u)",
+        "\u274c Nikola Jokic REB: 8 vs 12.5 OVER \u2192 LOSS (-0.4u)",
+        "\u274c Jeremiah Fears AST: 1 vs 2.5 OVER \u2192 LOSS (-0.5u)",
+        "\u2705 Naji Marshall AST: 3 vs 2.5 OVER \u2192 WIN (+0.4u)",
+        "\u274c LaMelo Ball PTS: 21 vs 19.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u274c Ryan Dunn REB: 1 vs 4.5 OVER \u2192 LOSS (-0.3u)",
+        "\u274c Cameron Johnson REB: 3 vs 3.5 OVER \u2192 LOSS (-0.3u)",
+        "\u274c Khris Middleton PTS: 7 vs 11.5 OVER \u2192 LOSS (-0.3u)",
+        "\u274c Royce O'Neale PTS: 11 vs 8.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u2705 Luka Doncic AST: 5 vs 9.5 UNDER \u2192 WIN (+0.3u)",
+        "\u2705 Cooper Flagg REB: 8 vs 4.5 OVER \u2192 WIN (+0.3u)",
+        "\u274c Luka Doncic REB: 9 vs 8.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u274c Pelle Larsson AST: 2 vs 3.5 OVER \u2192 LOSS (-0.3u)",
+        "\u2705 Dejounte Murray PTS: 15 vs 14.5 OVER \u2192 WIN (+0.3u)",
+        "\u2705 Nikola Jokic PTS: 38 vs 26.5 OVER \u2192 WIN (+0.3u)",
+        "\u2705 Khris Middleton AST: 3 vs 2.5 OVER \u2192 WIN (+0.3u)",
+        "\u274c Jrue Holiday REB: 4 vs 4.5 OVER \u2192 LOSS (-0.2u)",
+        "\u274c Jalen Green PTS: 25 vs 18.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u274c Saddiq Bey AST: 0 vs 2.5 OVER \u2192 LOSS (-0.3u)",
+        "\u2705 Bam Adebayo PTS: 24 vs 19.5 OVER \u2192 WIN (+0.3u)",
+        "\u274c De'Aaron Fox AST: 9 vs 6.5 UNDER \u2192 LOSS (-0.4u)",
+        "\u2705 Oso Ighodaro REB: 6 vs 8.5 UNDER \u2192 WIN (+0.3u)",
+        "\u2705 Keldon Johnson PTS: 10 vs 11.5 UNDER \u2192 WIN (+0.3u)",
+        "\u2705 Tari Eason PTS: 5 vs 12.5 UNDER \u2192 WIN (+0.2u)",
+        "\u2705 Miles Bridges PTS: 12 vs 14.5 UNDER \u2192 WIN (+0.3u)",
+        "\u2705 Pascal Siakam REB: 5 vs 5.5 UNDER \u2192 WIN (+0.3u)",
+        "\u274c Bruce Brown REB: 2 vs 3.5 OVER \u2192 LOSS (-0.3u)",
+        "\u2705 Landry Shamet PTS: 10 vs 9.5 OVER \u2192 WIN (+0.3u)",
+        "\u274c Kawhi Leonard PTS: 30 vs 27.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u2705 Sam Hauser REB: 5 vs 3.5 OVER \u2192 WIN (+0.2u)",
+        "\u2705 Jaylen Brown AST: 7 vs 4.5 OVER \u2192 WIN (+0.2u)",
+        "\u2705 Jalen Brunson PTS: 9 vs 26.5 UNDER \u2192 WIN (+0.2u)",
+        "\u274c Jerami Grant REB: 2 vs 3.5 OVER \u2192 LOSS (-0.2u)",
+        "\u274c Pelle Larsson PTS: 11 vs 11.5 OVER \u2192 LOSS (-0.2u)",
+        "\u2705 Jrue Holiday AST: 10 vs 5.5 OVER \u2192 WIN (+0.3u)",
+        "\u274c Davion Mitchell PTS: 13 vs 8.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u2705 LaMelo Ball AST: 5 vs 7.5 UNDER \u2192 WIN (+0.2u)",
+        "\u2705 Stephon Castle PTS: 6 vs 15.5 UNDER \u2192 WIN (+0.2u)",
+        "\u2705 Cooper Flagg AST: 6 vs 2.5 OVER \u2192 WIN (+0.2u)",
+        "\u274c Brandon Miller PTS: 22 vs 21.5 UNDER \u2192 LOSS (-0.2u)",
+        "\u2705 Max Christie PTS: 12 vs 10.5 OVER \u2192 WIN (+0.2u)",
+        "\u274c Amen Thompson PTS: 26 vs 17.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u2705 Coby White PTS: 13 vs 12.5 OVER \u2192 WIN (+0.2u)",
+        "\u274c Dylan Harper PTS: 8 vs 11.5 OVER \u2192 LOSS (-0.3u)",
+        "\u274c De'Aaron Fox PTS: 19 vs 17.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u274c Julian Champagnie AST: 1 vs 1.5 OVER \u2192 LOSS (-0.1u)",
+        "\u274c Devin Vassell PTS: 11 vs 13.5 OVER \u2192 LOSS (-0.2u)",
+        "\u2705 Tyler Herro AST: 9 vs 3.5 OVER \u2192 WIN (+0.2u)",
+        "\u2705 Bam Adebayo REB: 12 vs 9.5 OVER \u2192 WIN (+0.2u)",
+        "\u2705 Jerami Grant PTS: 21 vs 18.5 OVER \u2192 WIN (+0.2u)",
+        "\u274c Royce O'Neale REB: 6 vs 5.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u2705 Devin Booker REB: 4 vs 4.5 UNDER \u2192 WIN (+0.2u)",
+        "\u2705 Jordan Miller PTS: 11 vs 9.5 OVER \u2192 WIN (+0.2u)",
+        "\u2705 Derrick White PTS: 20 vs 16.5 OVER \u2192 WIN (+0.2u)",
+        "\u274c Reed Sheppard REB: 3 vs 3.5 OVER \u2192 LOSS (-0.2u)",
+        "\u274c Moussa Diabate PTS: 6 vs 9.5 OVER \u2192 LOSS (-0.2u)",
+        "\u274c Toumani Camara AST: 2 vs 2.5 OVER \u2192 LOSS (-0.1u)",
+        "\u274c Kon Knueppel PTS: 27 vs 19.5 UNDER \u2192 LOSS (-0.2u)",
+        "\u2705 Miles Bridges REB: 2 vs 5.5 UNDER \u2192 WIN (+0.2u)",
+        "\u274c Davion Mitchell AST: 7 vs 5.5 UNDER \u2192 LOSS (-0.1u)",
+        "\u2705 Kawhi Leonard AST: 3 vs 4.5 UNDER \u2192 WIN (+0.1u)",
+        "\u274c Grayson Allen PTS: 12 vs 18.5 OVER \u2192 LOSS (-0.1u)",
+        "\u274c Josh Hart PTS: 18 vs 11.5 UNDER \u2192 LOSS (-0.2u)",
+        "\u274c Coby White AST: 3 vs 3.5 OVER \u2192 LOSS (-0.1u)",
+        "\u274c Oso Ighodaro PTS: 13 vs 9.5 UNDER \u2192 LOSS (-0.1u)",
+        "\u274c P.J. Washington REB: 5 vs 6.5 OVER \u2192 LOSS (-0.1u)",
+        "\u2705 Max Christie REB: 4 vs 3.5 OVER \u2192 WIN (+0.1u)",
+        "\u2705 Jaylen Brown REB: 7 vs 6.5 OVER \u2192 WIN (+0.1u)",
+        "\u2705 Jaylen Brown PTS: 24 vs 27.5 UNDER \u2192 WIN (+0.1u)",
+        "\u2705 Pelle Larsson REB: 4 vs 3.5 OVER \u2192 WIN (+0.1u)",
+        "\u2705 Devin Vassell REB: 4 vs 3.5 OVER \u2192 WIN (+0.1u)",
+        "\u274c Trey Murphy III PTS: 22 vs 19.5 UNDER \u2192 LOSS (-0.1u)",
+        "\u274c Stephon Castle REB: 8 vs 4.5 UNDER \u2192 LOSS (-0.1u)",
+        "\u2705 Kobe Sanders AST: 1 vs 2.5 UNDER \u2192 WIN (+0.1u)",
+        "\u2705 Khris Middleton REB: 5 vs 3.5 OVER \u2192 WIN (+0.1u)",
+        "\u2705 Reed Sheppard AST: 6 vs 4.5 OVER \u2192 WIN (+0.1u)",
+        "\u2705 Toumani Camara PTS: 16 vs 12.5 OVER \u2192 WIN (+0.1u)"
+      ],
+      "hit_rate": 0.491
     }
   ]
 }

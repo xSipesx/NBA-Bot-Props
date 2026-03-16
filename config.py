@@ -19,16 +19,16 @@ SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", "")
 EMAIL_TO = os.environ.get("EMAIL_TO", "")
 
 # ── MODEL PARAMETERS ──
-# Projection weighting
-SEASON_WEIGHT = 0.35
-L10_WEIGHT = 0.35
-L5_WEIGHT = 0.30
+# Projection weighting (v7: dampened L5 to stop streak-chasing)
+SEASON_WEIGHT = 0.45
+L10_WEIGHT = 0.40
+L5_WEIGHT = 0.15
 
-# Edge thresholds (now using real projections, edges are genuine)
-MIN_EDGE_THRESHOLD = 0.03    # 3% minimum edge
-EDGE_LOW = 0.03              # 3-5%
-EDGE_MEDIUM = 0.05           # 5-8%
-EDGE_HIGH = 0.08             # 8%+
+# Edge thresholds (v7: raised — stat-specific thresholds in predict.py)
+MIN_EDGE_THRESHOLD = 0.05    # 5% minimum for PTS
+EDGE_LOW = 0.05              # 5-8%
+EDGE_MEDIUM = 0.08           # 8-12%
+EDGE_HIGH = 0.12             # 12%+
 
 # Bet sizing
 KELLY_FRACTION = 0.25

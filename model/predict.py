@@ -1,57 +1,58 @@
 """
-NBA Props Agent — Prediction Engine v6
+NBA Props Agent — Prediction Engine v7
 
-FUNDAMENTAL CHANGE: Uses actual player stats (from ESPN) to build
-independent projections, then compares against sportsbook lines.
-
-Projection = weighted blend of:
-  - Season average (35%)
-  - Last 10 games (35%)
-  - Last 5 games (30%)
-  
-Adjusted for minutes trend.
-
-Edge = Model probability vs implied probability from odds.
-Only flags plays on rotation players (20+ MPG) with meaningful lines.
+CHANGES FROM v6 (391W-418L, 48%, -20.9u diagnosis):
+1. Projection weights: 45% season, 40% L10, 15% L5 (was 35/35/30)
+   → Stops chasing hot/cold streaks books already priced in
+2. Higher line floors: PTS≥14.5, REB≥3.5, AST≥2.5
+   → No more garbage bench player props
+3. Stat-specific edge thresholds: PTS≥5%, REB/AST≥8%
+   → REB/AST have too much variance for small edges to be real
+4. Hard cap: max 15 plays per day, sorted by edge
+   → Eliminates marginal bets that lose to vig
+5. Std dev floor raised to 3.0 (was 2.0)
+   → Model was overconfident on low-variance projections
+6. Minutes floor raised to 25 MPG (was 20)
+   → Focus on starters, not rotation guys
 """
 
 from scipy.stats import norm
 import config
 
 
-# Minimum line thresholds — ignore tiny props nobody would bet
+# Minimum line thresholds — raised to filter out low-value props
 MIN_LINE = {
-    'PTS': 8.5,    # ignore sub-8.5 point props
-    'REB': 2.5,    # ignore sub-2.5 rebound props
-    'AST': 1.5,    # ignore sub-1.5 assist props
+    'PTS': 14.5,
+    'REB': 3.5,
+    'AST': 2.5,
 }
 
-# Minimum minutes to consider a player
-MIN_MINUTES = 20
+# Stat-specific minimum edge — REB/AST need bigger edge to overcome variance
+MIN_EDGE = {
+    'PTS': 0.05,   # 5%
+    'REB': 0.08,   # 8%
+    'AST': 0.08,   # 8%
+}
+
+# Max plays per day — only take the best
+MAX_DAILY_PLAYS = 15
+
+# Minimum minutes to consider
+MIN_MINUTES = 25
 
 
 def predict_from_props(raw_props, games, injuries, player_stats):
-    """
-    Generate predictions by comparing ESPN-based projections vs prop lines.
-    
-    Args:
-        raw_props: list of prop dicts from Odds API
-        games: list of game dicts
-        injuries: list of injury dicts
-        player_stats: list of player dicts from ESPN with season/recent averages
-    """
-    # Index player stats by name for fast lookup
+    """Generate predictions comparing ESPN projections vs prop lines."""
     stats_by_name = {}
     for p in player_stats:
         stats_by_name[p['name']] = p
 
-    # Build injury out list by team
     team_outs = {}
     for inj in injuries:
         if inj.get('status', '').upper() in ('OUT', 'SUSPENDED'):
             team_outs.setdefault(inj.get('team', ''), []).append(inj)
 
-    predictions = []
+    all_predictions = []
     skipped_no_stats = 0
     skipped_low_line = 0
     skipped_low_min = 0
@@ -60,17 +61,13 @@ def predict_from_props(raw_props, games, injuries, player_stats):
         player_name = prop['player_name']
         line = prop['line']
         stat = prop.get('stat', 'PTS')
-        market = prop.get('market', 'player_points')
 
-        # Skip tiny props
-        if line < MIN_LINE.get(stat, 2.5):
+        if line < MIN_LINE.get(stat, 3.5):
             skipped_low_line += 1
             continue
 
-        # Find player stats (try exact match, then fuzzy)
         pstats = stats_by_name.get(player_name)
         if not pstats:
-            # Try matching by last name
             for name, s in stats_by_name.items():
                 if player_name.split()[-1] == name.split()[-1] and player_name[0] == name[0]:
                     pstats = s
@@ -86,19 +83,36 @@ def predict_from_props(raw_props, games, injuries, player_stats):
 
         pred = _predict_single(prop, pstats, games, team_outs)
         if pred:
-            predictions.append(pred)
+            all_predictions.append(pred)
 
-    predictions.sort(key=lambda x: -abs(x.get('edge', 0)))
+    # Apply stat-specific edge thresholds
+    actionable = []
+    for p in all_predictions:
+        stat = p.get('stat', 'PTS')
+        min_edge = MIN_EDGE.get(stat, 0.05)
+        if p['side'] != 'NO_BET' and p['edge'] >= min_edge:
+            actionable.append(p)
+        else:
+            p['side'] = 'NO_BET'
 
-    actionable = [p for p in predictions if p['side'] != 'NO_BET']
+    # Sort by edge and cap at MAX_DAILY_PLAYS
+    actionable.sort(key=lambda x: -x['edge'])
+    if len(actionable) > MAX_DAILY_PLAYS:
+        # Demote plays beyond the cap
+        for p in actionable[MAX_DAILY_PLAYS:]:
+            p['side'] = 'NO_BET'
+        actionable = actionable[:MAX_DAILY_PLAYS]
+
     over_ct = len([p for p in actionable if p['side'] == 'OVER'])
     under_ct = len([p for p in actionable if p['side'] == 'UNDER'])
-    
-    print(f"\n🎯 Predictions: {len(predictions)} analyzed, {len(actionable)} actionable "
-          f"({over_ct} OVER, {under_ct} UNDER)", flush=True)
+
+    print(f"\n🎯 Predictions: {len(all_predictions)} analyzed, {len(actionable)} actionable "
+          f"({over_ct} OVER, {under_ct} UNDER) [capped at {MAX_DAILY_PLAYS}]", flush=True)
     print(f"   Skipped: {skipped_no_stats} no stats, {skipped_low_line} low line, "
           f"{skipped_low_min} low minutes", flush=True)
-    return predictions
+
+    # Return all predictions (actionable + no_bet) for Claude analysis context
+    return all_predictions
 
 
 def _predict_single(prop, pstats, games, team_outs):
@@ -109,7 +123,6 @@ def _predict_single(prop, pstats, games, team_outs):
     under_odds = prop.get('under_odds', -110)
     stat = prop.get('stat', 'PTS')
 
-    # Find game
     game_str = prop.get('game', '')
     game = None
     for g in games:
@@ -119,43 +132,42 @@ def _predict_single(prop, pstats, games, team_outs):
 
     # ── Build projection from real data ──
     stat_key = {'PTS': 'pts', 'REB': 'reb', 'AST': 'ast'}.get(stat, 'pts')
-    
+
     season_avg = pstats.get(f'{stat_key}_avg', 0)
     l10_avg = pstats.get(f'{stat_key}_l10', season_avg)
     l5_avg = pstats.get(f'{stat_key}_l5', season_avg)
     player_std = pstats.get(f'{stat_key}_std', 5.0)
 
-    # Skip if we don't have real data
     if season_avg == 0 and l10_avg == 0:
         return None
 
-    # Weighted projection
-    projection = (0.35 * season_avg) + (0.35 * l10_avg) + (0.30 * l5_avg)
+    # v7 weights: heavier on season (stable), lighter on L5 (noisy)
+    projection = (0.45 * season_avg) + (0.40 * l10_avg) + (0.15 * l5_avg)
 
-    # Minutes trend adjustment
+    # Minutes trend adjustment (dampened — cap at ±10%)
     min_pg = pstats.get('min_pg', 30)
     min_l5 = pstats.get('min_l5', min_pg)
     if min_pg > 0:
         min_ratio = min_l5 / min_pg
-        min_ratio = max(0.85, min(1.15, min_ratio))
+        min_ratio = max(0.90, min(1.10, min_ratio))
         projection *= min_ratio
 
-    # Injury boost: if teammates are out, slight usage bump for remaining players
+    # Injury boost (points only, conservative)
     injury_adj = 0.0
-    if game:
+    if game and stat == 'PTS':
         player_team = pstats.get('team', '')
         team_out_list = team_outs.get(player_team, [])
-        if len(team_out_list) >= 2 and stat == 'PTS':
-            injury_adj = projection * 0.03  # 3% scoring bump
-        if len(team_out_list) >= 4 and stat == 'PTS':
-            injury_adj = projection * 0.06  # 6% bump for decimated teams
+        if len(team_out_list) >= 3:
+            injury_adj = projection * 0.03
+        if len(team_out_list) >= 5:
+            injury_adj = projection * 0.05
 
     projection += injury_adj
     projection = max(0.5, round(projection, 1))
 
     # ── Edge calculation ──
-    # Use the player's ACTUAL std dev from their game log
-    estimated_std = max(player_std, 2.0)
+    # Std dev floor raised to 3.0 to prevent overconfidence
+    estimated_std = max(player_std, 3.0)
 
     prob_over = 1 - norm.cdf(line + 0.5, loc=projection, scale=estimated_std)
     prob_under = norm.cdf(line - 0.5, loc=projection, scale=estimated_std)
@@ -170,23 +182,21 @@ def _predict_single(prop, pstats, games, team_outs):
     edge_over = prob_over - fair_over
     edge_under = prob_under - fair_under
 
-    # No artificial cap — with real stats, large edges are legitimate
-    # (e.g., Booker averaging 7 PPG L5 vs a 23.5 line IS a huge edge)
-
-    # Pick side
-    if edge_over >= config.MIN_EDGE_THRESHOLD and edge_over > edge_under:
+    # Pick side (threshold checked later in predict_from_props with stat-specific minimums)
+    base_threshold = 0.03  # loose filter here, tightened per-stat above
+    if edge_over >= base_threshold and edge_over > edge_under:
         side, edge, odds = 'OVER', edge_over, over_odds
-    elif edge_under >= config.MIN_EDGE_THRESHOLD and edge_under > edge_over:
+    elif edge_under >= base_threshold and edge_under > edge_over:
         side, edge, odds = 'UNDER', edge_under, under_odds
     else:
         side, edge, odds = 'NO_BET', max(edge_over, edge_under, 0), -110
 
     # Confidence
-    if edge >= config.EDGE_HIGH:
+    if edge >= 0.12:
         confidence = 'HIGH'
-    elif edge >= config.EDGE_MEDIUM:
+    elif edge >= 0.08:
         confidence = 'MEDIUM'
-    elif edge >= config.EDGE_LOW:
+    elif edge >= 0.05:
         confidence = 'LOW'
     else:
         confidence = 'NONE'

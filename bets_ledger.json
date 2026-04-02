@@ -18645,9 +18645,9 @@
       "units": 0.5,
       "projection": 23.0,
       "season_avg": 20.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 32.0,
+      "pnl": 0.38
     },
     {
       "date": "2026-04-01",
@@ -18662,9 +18662,9 @@
       "units": 0.2,
       "projection": 6.3,
       "season_avg": 5.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 7.0,
+      "pnl": 0.23
     },
     {
       "date": "2026-04-01",
@@ -18679,9 +18679,9 @@
       "units": 0.3,
       "projection": 12.6,
       "season_avg": 15.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 13.0,
+      "pnl": 0.27
     },
     {
       "date": "2026-04-01",
@@ -18696,9 +18696,9 @@
       "units": 0.4,
       "projection": 30.6,
       "season_avg": 27.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 43.0,
+      "pnl": 0.35
     },
     {
       "date": "2026-04-01",
@@ -18713,9 +18713,9 @@
       "units": 0.4,
       "projection": 26.8,
       "season_avg": 25.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 19.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-04-01",
@@ -18730,9 +18730,9 @@
       "units": 0.5,
       "projection": 22.7,
       "season_avg": 20.0,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 25.0,
+      "pnl": 0.43
     },
     {
       "date": "2026-04-01",
@@ -18747,9 +18747,9 @@
       "units": 0.4,
       "projection": 19.2,
       "season_avg": 17.9,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 18.0,
+      "pnl": 0.38
     },
     {
       "date": "2026-04-01",
@@ -18764,9 +18764,9 @@
       "units": 0.4,
       "projection": 18.9,
       "season_avg": 19.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 20.0,
+      "pnl": 0.37
     },
     {
       "date": "2026-04-01",
@@ -18781,9 +18781,9 @@
       "units": 0.4,
       "projection": 10.7,
       "season_avg": 11.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 11.0,
+      "pnl": 0.42
     },
     {
       "date": "2026-04-01",
@@ -18798,7 +18798,7 @@
       "units": 0.5,
       "projection": 19.4,
       "season_avg": 19.1,
-      "result": null,
+      "result": "DNP",
       "actual": null,
       "pnl": null
     },
@@ -18815,9 +18815,9 @@
       "units": 0.5,
       "projection": 15.3,
       "season_avg": 17.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 14.0,
+      "pnl": 0.42
     },
     {
       "date": "2026-04-01",
@@ -18832,9 +18832,9 @@
       "units": 0.2,
       "projection": 6.6,
       "season_avg": 7.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.22
     },
     {
       "date": "2026-04-01",
@@ -18849,9 +18849,9 @@
       "units": 0.3,
       "projection": 22.0,
       "season_avg": 23.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 25.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-04-01",
@@ -18866,9 +18866,9 @@
       "units": 0.3,
       "projection": 12.8,
       "season_avg": 10.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 12.0,
+      "pnl": 0.32
     },
     {
       "date": "2026-04-01",
@@ -18883,6 +18883,261 @@
       "units": 0.3,
       "projection": 15.0,
       "season_avg": 12.7,
+      "result": "WIN",
+      "actual": 17.0,
+      "pnl": 0.28
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Dillon Brooks",
+      "team": "PHX",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 15.5,
+      "odds": 102,
+      "edge": 0.1602,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 18.4,
+      "season_avg": 20.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Jalen Duren",
+      "team": "DET",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 21.5,
+      "odds": -113,
+      "edge": 0.1139,
+      "confidence": "MEDIUM",
+      "units": 0.3,
+      "projection": 24.2,
+      "season_avg": 18.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Ayo Dosunmu",
+      "team": "MIN",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 4.5,
+      "odds": -122,
+      "edge": 0.1243,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 6.1,
+      "season_avg": 3.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "LeBron James",
+      "team": "LAL",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 6.5,
+      "odds": -102,
+      "edge": 0.1333,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 7.8,
+      "season_avg": 6.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Jalen Williams",
+      "team": "OKC",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 18.5,
+      "odds": -130,
+      "edge": 0.1406,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 15.6,
+      "season_avg": 17.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Luka Doncic",
+      "team": "LAL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 30.5,
+      "odds": -125,
+      "edge": 0.2819,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 39.2,
+      "season_avg": 33.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "LeBron James",
+      "team": "LAL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 17.5,
+      "odds": -112,
+      "edge": 0.1294,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 20.2,
+      "season_avg": 19.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Austin Reaves",
+      "team": "LAL",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 19.5,
+      "odds": -114,
+      "edge": 0.1595,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 23.7,
+      "season_avg": 23.4,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "LeBron James",
+      "team": "LAL",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 5.5,
+      "odds": -154,
+      "edge": 0.1126,
+      "confidence": "MEDIUM",
+      "units": 0.4,
+      "projection": 7.4,
+      "season_avg": 5.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "James Harden",
+      "team": "CLE",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 19.5,
+      "odds": -108,
+      "edge": 0.1043,
+      "confidence": "MEDIUM",
+      "units": 0.3,
+      "projection": 21.8,
+      "season_avg": 23.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Brandin Podziemski",
+      "team": "GSW",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 5.5,
+      "odds": 118,
+      "edge": 0.1248,
+      "confidence": "HIGH",
+      "units": 0.3,
+      "projection": 6.4,
+      "season_avg": 5.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Donovan Clingan",
+      "team": "POR",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 14.5,
+      "odds": -106,
+      "edge": 0.1984,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 11.3,
+      "season_avg": 12.1,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Jrue Holiday",
+      "team": "POR",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 17.5,
+      "odds": -108,
+      "edge": 0.1103,
+      "confidence": "MEDIUM",
+      "units": 0.3,
+      "projection": 15.2,
+      "season_avg": 16.1,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "Deni Avdija",
+      "team": "POR",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 25.5,
+      "odds": -104,
+      "edge": 0.2348,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 20.5,
+      "season_avg": 23.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-02",
+      "player_name": "De'Aaron Fox",
+      "team": "SAS",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 18.5,
+      "odds": -112,
+      "edge": 0.1793,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 14.5,
+      "season_avg": 17.8,
       "result": null,
       "actual": null,
       "pnl": null
@@ -20075,6 +20330,30 @@
         "\u274c Brandon Miller REB: 4 vs 5.5 OVER \u2192 LOSS (-0.2u)"
       ],
       "hit_rate": 0.2
+    },
+    {
+      "date": "2026-04-01",
+      "wins": 12,
+      "losses": 2,
+      "pushes": 0,
+      "pnl": 3.38,
+      "details": [
+        "\u2705 Nickeil Alexander-Walker PTS: 32 vs 18.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Jaylen Brown AST: 7 vs 5.5 OVER \u2192 WIN (+0.2u)",
+        "\u2705 Andrew Wiggins PTS: 13 vs 14.5 UNDER \u2192 WIN (+0.3u)",
+        "\u2705 Jaylen Brown PTS: 43 vs 26.5 OVER \u2192 WIN (+0.3u)",
+        "\u274c Kevin Durant PTS: 19 vs 23.5 OVER \u2192 LOSS (-0.4u)",
+        "\u2705 Alperen Sengun PTS: 25 vs 18.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Amen Thompson PTS: 18 vs 16.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Karl-Anthony Towns PTS: 20 vs 22.5 UNDER \u2192 WIN (+0.4u)",
+        "\u2705 Karl-Anthony Towns REB: 11 vs 12.5 UNDER \u2192 WIN (+0.4u)",
+        "\u2705 Scottie Barnes PTS: 14 vs 20.5 UNDER \u2192 WIN (+0.4u)",
+        "\u2705 Jakob Poeltl REB: 5 vs 7.5 UNDER \u2192 WIN (+0.2u)",
+        "\u274c Pascal Siakam PTS: 25 vs 24.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u2705 Nikola Jokic AST: 12 vs 11.5 OVER \u2192 WIN (+0.3u)",
+        "\u2705 Nikola Jokic REB: 17 vs 13.5 OVER \u2192 WIN (+0.3u)"
+      ],
+      "hit_rate": 0.857
     }
   ]
 }

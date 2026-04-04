@@ -19155,9 +19155,9 @@
       "units": 0.3,
       "projection": 7.8,
       "season_avg": 7.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 9.0,
+      "pnl": 0.28
     },
     {
       "date": "2026-04-03",
@@ -19172,9 +19172,9 @@
       "units": 0.5,
       "projection": 21.4,
       "season_avg": 17.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 23.0,
+      "pnl": 0.43
     },
     {
       "date": "2026-04-03",
@@ -19189,9 +19189,9 @@
       "units": 0.3,
       "projection": 29.7,
       "season_avg": 27.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 21.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-04-03",
@@ -19206,9 +19206,9 @@
       "units": 0.4,
       "projection": 6.2,
       "season_avg": 3.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 5.0,
+      "pnl": 0.35
     },
     {
       "date": "2026-04-03",
@@ -19223,7 +19223,7 @@
       "units": 0.3,
       "projection": 20.1,
       "season_avg": 18.6,
-      "result": null,
+      "result": "DNP",
       "actual": null,
       "pnl": null
     },
@@ -19240,9 +19240,9 @@
       "units": 0.5,
       "projection": 24.7,
       "season_avg": 20.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 21.0,
+      "pnl": 0.38
     },
     {
       "date": "2026-04-03",
@@ -19257,9 +19257,9 @@
       "units": 0.4,
       "projection": 11.2,
       "season_avg": 9.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 5.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-04-03",
@@ -19274,9 +19274,9 @@
       "units": 0.3,
       "projection": 19.5,
       "season_avg": 16.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 11.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-04-03",
@@ -19291,7 +19291,7 @@
       "units": 0.2,
       "projection": 18.5,
       "season_avg": 19.7,
-      "result": null,
+      "result": "DNP",
       "actual": null,
       "pnl": null
     },
@@ -19308,9 +19308,9 @@
       "units": 0.3,
       "projection": 7.5,
       "season_avg": 5.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 6.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-04-03",
@@ -19325,9 +19325,9 @@
       "units": 0.3,
       "projection": 6.4,
       "season_avg": 5.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 4.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-04-03",
@@ -19342,9 +19342,9 @@
       "units": 0.5,
       "projection": 32.0,
       "season_avg": 27.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 26.0,
+      "pnl": 0.41
     },
     {
       "date": "2026-04-03",
@@ -19359,9 +19359,9 @@
       "units": 0.5,
       "projection": 11.2,
       "season_avg": 9.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 11.0,
+      "pnl": 0.41
     },
     {
       "date": "2026-04-03",
@@ -19376,9 +19376,9 @@
       "units": 0.3,
       "projection": 8.7,
       "season_avg": 7.8,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 8.0,
+      "pnl": 0.31
     },
     {
       "date": "2026-04-03",
@@ -19393,6 +19393,261 @@
       "units": 0.4,
       "projection": 15.9,
       "season_avg": 17.8,
+      "result": "WIN",
+      "actual": 10.0,
+      "pnl": 0.38
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Bam Adebayo",
+      "team": "MIA",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 6.5,
+      "odds": 130,
+      "edge": 0.372,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 3.7,
+      "season_avg": 3.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Andrew Wiggins",
+      "team": "MIA",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 18.5,
+      "odds": 104,
+      "edge": 0.3259,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 13.6,
+      "season_avg": 15.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Pelle Larsson",
+      "team": "MIA",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 6.5,
+      "odds": 122,
+      "edge": 0.2931,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 4.3,
+      "season_avg": 3.5,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Victor Wembanyama",
+      "team": "SAS",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 5.5,
+      "odds": -102,
+      "edge": 0.2196,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 3.5,
+      "season_avg": 2.9,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Christian Braun",
+      "team": "DEN",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 3.5,
+      "odds": 178,
+      "edge": 0.256,
+      "confidence": "HIGH",
+      "units": 0.4,
+      "projection": 2.3,
+      "season_avg": 2.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Nikola Jokic",
+      "team": "DEN",
+      "stat": "AST",
+      "side": "OVER",
+      "line": 9.5,
+      "odds": -130,
+      "edge": 0.2307,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 12.6,
+      "season_avg": 10.6,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Devin Vassell",
+      "team": "SAS",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 16.5,
+      "odds": 100,
+      "edge": 0.2611,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 12.1,
+      "season_avg": 14.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Jamal Murray",
+      "team": "DEN",
+      "stat": "PTS",
+      "side": "OVER",
+      "line": 18.5,
+      "odds": -118,
+      "edge": 0.3161,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 28.7,
+      "season_avg": 25.0,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Nikola Jokic",
+      "team": "DEN",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 34.5,
+      "odds": -102,
+      "edge": 0.3278,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 26.1,
+      "season_avg": 27.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Christian Braun",
+      "team": "DEN",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 15.5,
+      "odds": -106,
+      "edge": 0.2192,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 11.8,
+      "season_avg": 11.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Nikola Jokic",
+      "team": "DEN",
+      "stat": "REB",
+      "side": "OVER",
+      "line": 11.5,
+      "odds": 114,
+      "edge": 0.3161,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 14.8,
+      "season_avg": 12.8,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Victor Wembanyama",
+      "team": "SAS",
+      "stat": "REB",
+      "side": "UNDER",
+      "line": 17.5,
+      "odds": -146,
+      "edge": 0.317,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 12.8,
+      "season_avg": 11.2,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "LeBron James",
+      "team": "LAL",
+      "stat": "AST",
+      "side": "UNDER",
+      "line": 9.5,
+      "odds": -146,
+      "edge": 0.2032,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 6.9,
+      "season_avg": 6.7,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "Austin Reaves",
+      "team": "LAL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 28.5,
+      "odds": -112,
+      "edge": 0.2844,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 21.1,
+      "season_avg": 23.3,
+      "result": null,
+      "actual": null,
+      "pnl": null
+    },
+    {
+      "date": "2026-04-04",
+      "player_name": "LeBron James",
+      "team": "LAL",
+      "stat": "PTS",
+      "side": "UNDER",
+      "line": 23.5,
+      "odds": -132,
+      "edge": 0.2059,
+      "confidence": "HIGH",
+      "units": 0.5,
+      "projection": 18.6,
+      "season_avg": 19.8,
       "result": null,
       "actual": null,
       "pnl": null
@@ -20634,6 +20889,29 @@
         "\u274c De'Aaron Fox PTS: 22 vs 18.5 UNDER \u2192 LOSS (-0.5u)"
       ],
       "hit_rate": 0.333
+    },
+    {
+      "date": "2026-04-03",
+      "wins": 8,
+      "losses": 5,
+      "pushes": 0,
+      "pnl": 1.37,
+      "details": [
+        "\u2705 LaMelo Ball AST: 9 vs 6.5 OVER \u2192 WIN (+0.3u)",
+        "\u2705 Paul George PTS: 23 vs 15.5 OVER \u2192 WIN (+0.4u)",
+        "\u274c Tyrese Maxey PTS: 21 vs 26.5 OVER \u2192 LOSS (-0.3u)",
+        "\u2705 Ayo Dosunmu REB: 5 vs 4.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Nickeil Alexander-Walker PTS: 21 vs 19.5 OVER \u2192 WIN (+0.4u)",
+        "\u274c Josh Giddey AST: 5 vs 9.5 OVER \u2192 LOSS (-0.4u)",
+        "\u274c Matas Buzelis PTS: 11 vs 17.5 OVER \u2192 LOSS (-0.3u)",
+        "\u274c Matas Buzelis REB: 6 vs 6.5 OVER \u2192 LOSS (-0.3u)",
+        "\u274c Jaylen Brown AST: 4 vs 5.5 OVER \u2192 LOSS (-0.3u)",
+        "\u2705 Jaylen Brown PTS: 26 vs 25.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Jayson Tatum REB: 11 vs 8.5 OVER \u2192 WIN (+0.4u)",
+        "\u2705 Amen Thompson REB: 8 vs 7.5 OVER \u2192 WIN (+0.3u)",
+        "\u2705 Scottie Barnes PTS: 10 vs 18.5 UNDER \u2192 WIN (+0.4u)"
+      ],
+      "hit_rate": 0.615
     }
   ]
 }

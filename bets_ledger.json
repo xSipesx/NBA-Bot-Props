@@ -20175,9 +20175,9 @@
       "units": 0.3,
       "projection": 5.4,
       "season_avg": 5.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 9.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-04-07",
@@ -20192,9 +20192,9 @@
       "units": 0.3,
       "projection": 16.4,
       "season_avg": 13.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 20.0,
+      "pnl": -0.3
     },
     {
       "date": "2026-04-07",
@@ -20209,9 +20209,9 @@
       "units": 0.3,
       "projection": 13.6,
       "season_avg": 11.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 11.0,
+      "pnl": 0.3
     },
     {
       "date": "2026-04-07",
@@ -20226,7 +20226,7 @@
       "units": 0.5,
       "projection": 11.6,
       "season_avg": 9.8,
-      "result": null,
+      "result": "DNP",
       "actual": null,
       "pnl": null
     },
@@ -20243,9 +20243,9 @@
       "units": 0.5,
       "projection": 14.1,
       "season_avg": 17.6,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 25.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-04-07",
@@ -20260,9 +20260,9 @@
       "units": 0.4,
       "projection": 20.5,
       "season_avg": 21.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 14.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-04-07",
@@ -20277,9 +20277,9 @@
       "units": 0.4,
       "projection": 6.0,
       "season_avg": 7.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 6.0,
+      "pnl": 0.39
     },
     {
       "date": "2026-04-07",
@@ -20294,9 +20294,9 @@
       "units": 0.4,
       "projection": 5.5,
       "season_avg": 7.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 8.0,
+      "pnl": -0.4
     },
     {
       "date": "2026-04-07",
@@ -20311,9 +20311,9 @@
       "units": 0.4,
       "projection": 24.1,
       "season_avg": 21.5,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 23.0,
+      "pnl": 0.31
     },
     {
       "date": "2026-04-07",
@@ -20328,9 +20328,9 @@
       "units": 0.5,
       "projection": 31.8,
       "season_avg": 27.7,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 35.0,
+      "pnl": 0.48
     },
     {
       "date": "2026-04-07",
@@ -20345,9 +20345,9 @@
       "units": 0.5,
       "projection": 11.4,
       "season_avg": 10.1,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 5.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-04-07",
@@ -20362,9 +20362,9 @@
       "units": 0.5,
       "projection": 4.1,
       "season_avg": 3.3,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 6.0,
+      "pnl": 0.37
     },
     {
       "date": "2026-04-07",
@@ -20379,9 +20379,9 @@
       "units": 0.5,
       "projection": 16.2,
       "season_avg": 13.4,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "LOSS",
+      "actual": 40.0,
+      "pnl": -0.5
     },
     {
       "date": "2026-04-07",
@@ -20396,7 +20396,7 @@
       "units": 0.5,
       "projection": 18.4,
       "season_avg": 21.0,
-      "result": null,
+      "result": "DNP",
       "actual": null,
       "pnl": null
     },
@@ -20413,9 +20413,9 @@
       "units": 0.5,
       "projection": 9.5,
       "season_avg": 11.2,
-      "result": null,
-      "actual": null,
-      "pnl": null
+      "result": "WIN",
+      "actual": 15.0,
+      "pnl": 0.47
     }
   ],
   "results": [
@@ -21747,6 +21747,29 @@
         "\u2705 Nikola Jokic REB: 14 vs 13.5 OVER \u2192 WIN (+0.3u)"
       ],
       "hit_rate": 0.533
+    },
+    {
+      "date": "2026-04-07",
+      "wins": 6,
+      "losses": 7,
+      "pushes": 0,
+      "pnl": -0.58,
+      "details": [
+        "\u274c Tre Jones AST: 9 vs 6.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u274c Tre Jones PTS: 20 vs 18.5 UNDER \u2192 LOSS (-0.3u)",
+        "\u2705 Jarace Walker PTS: 11 vs 15.5 UNDER \u2192 WIN (+0.3u)",
+        "\u274c Scottie Barnes PTS: 25 vs 17.5 UNDER \u2192 LOSS (-0.5u)",
+        "\u274c Norman Powell PTS: 14 vs 17.5 OVER \u2192 LOSS (-0.4u)",
+        "\u2705 Jakob Poeltl REB: 6 vs 7.5 UNDER \u2192 WIN (+0.4u)",
+        "\u274c Scottie Barnes REB: 8 vs 7.5 UNDER \u2192 LOSS (-0.4u)",
+        "\u2705 Jayson Tatum PTS: 23 vs 21.5 OVER \u2192 WIN (+0.3u)",
+        "\u2705 Jaylen Brown PTS: 35 vs 26.5 OVER \u2192 WIN (+0.5u)",
+        "\u274c Jayson Tatum REB: 5 vs 8.5 OVER \u2192 LOSS (-0.5u)",
+        "\u2705 Jeremiah Fears AST: 6 vs 6.5 UNDER \u2192 WIN (+0.4u)",
+        "\u274c Jeremiah Fears PTS: 40 vs 19.5 UNDER \u2192 LOSS (-0.5u)",
+        "\u2705 Rui Hachimura PTS: 15 vs 15.5 UNDER \u2192 WIN (+0.5u)"
+      ],
+      "hit_rate": 0.462
     }
   ]
 }
